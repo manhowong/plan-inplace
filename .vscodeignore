@@ -1,0 +1,27 @@
+.vscode/**
+.vscode-test/**
+out/**
+src/**
+tests/**
+demo-projects/**
+node_modules/**
+tsconfig.json
+vite.config.ts
+README.md
+DEVELOPER.md
+package-lock.json
+.gitignore
+.env.example
+index.html
+manifest.webmanifest
+metadata.json
+chrome/**
+
+# Keep the built extension
+!dist-extension/extension.cjs
+
+# Keep the extension icon assets
+!assets/images/**
+
+#Keep the vscode extension source
+!apps/vscode/**

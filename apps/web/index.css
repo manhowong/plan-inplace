@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #161616;
+  --sidebar-bg: #242424;
+  --card-bg: #3c3c3c;
+  --border: #414141;
+  --text-primary: #ffffff;
+  --text-secondary: #aeaeae;
+  --accent: #2FA084;
+  --tag-bg: #242424;
+  --priority-unassigned: #aeaeae;
+  --priority-high: #ef4444;
+  --priority-med: #eab308;
+  --priority-low: #2FA084;
+  --sidebar-active: #333333;
+}
+
+:root.light {
+  --bg: #ffffff;
+  --sidebar-bg: #f4f4f4;
+  --card-bg: #ffffff;
+  --border: #d0d0d0;
+  --text-primary: #111316;
+  --text-secondary: #545454;
+  --accent: #2FA084;
+  --tag-bg: #f5f5f5;
+  --priority-unassigned: #545454;
+  --priority-high: #ef4444;
+  --priority-med: #eab308;
+  --priority-low: #2FA084;
+  --sidebar-active: #e6e6e6;
+}
+
+@theme {
+  --font-sans: var(--vscode-font-family), ui-sans-serif, system-ui, sans-serif;
+
+  --color-bg: var(--bg);
+  --color-sidebar: var(--sidebar-bg);
+  --color-card: var(--card-bg);
+  --color-border: var(--border);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-accent: var(--accent);
+  --color-tag-bg: var(--tag-bg);
+  --color-sidebar-active: var(--sidebar-active);
+  
+  --color-priority-unassigned: var(--priority-unassigned);
+  --color-priority-high: var(--priority-high);
+  --color-priority-med: var(--priority-med);
+  --color-priority-low: var(--priority-low);
+
+  --color-option-slate: #64748b;
+  --color-option-gray: #6b7280;
+  --color-option-zinc: #71717a;
+  --color-option-neutral: #737373;
+  --color-option-stone: #78716c;
+  --color-option-red: #ef4444;
+  --color-option-orange: #f97316;
+  --color-option-amber: #f59e0b;
+  --color-option-yellow: #eab308;
+  --color-option-lime: #84cc16;
+  --color-option-green: #22c55e;
+  --color-option-emerald: #10b981;
+  --color-option-teal: #14b8a6;
+  --color-option-cyan: #06b6d4;
+  --color-option-sky: #0ea5e9;
+  --color-option-blue: #3b82f6;
+  --color-option-indigo: #6366f1;
+  --color-option-violet: #8b5cf6;
+  --color-option-purple: #a855f7;
+  --color-option-fuchsia: #d946ef;
+  --color-option-pink: #ec4899;
+}
+
+@supports selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-color: unset; /* Required to 're-enable' webkit styles */
+  }
+}
+
+@layer base {
+  body {
+    @apply antialiased bg-bg text-text-primary font-sans text-[13px];
+  }
+
+  /* Custom scrollbar for a cleaner look - use important to prevent VSCode theme overrides */
+  
+  ::-webkit-scrollbar {
+    width: 10px !important;
+    height: 10px !important;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent !important;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--border) !important;
+    border-radius: 20px !important;
+    /* border: 1px solid var(--bg) !important; */
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-secondary) !important;
+  }
+
+  /* Styles the intersection between horizontal and vertical scrollbars */
+  ::-webkit-scrollbar-corner {
+    background: var(--bg) !important;
+  }
+
+  ::-webkit-scrollbar-button {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  button, [role="button"], select, input[type="checkbox"], input[type="radio"], .cursor-pointer {
+    cursor: pointer;
+  }
+}
+
+code {
+  background-color: var(--sidebar-bg) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* Prose overrides for the theme */
+.prose {
+  @apply max-w-none text-text-primary;
+}
+
+.prose h1, .prose h2, .prose h3 {
+  @apply font-semibold tracking-tight text-text-primary;
+}
+
+.prose p {
+  @apply leading-relaxed text-text-secondary;
+}
+
+.prose code {
+  @apply font-mono bg-tag-bg px-1 rounded text-accent;
+}
+
+/* Date input calendar button */
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(1) hue-rotate(180deg);
+}
+
+:root.light input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: none;
+}
