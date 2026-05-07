@@ -9,6 +9,7 @@ import {
   Pencil,
   X,
   HelpCircle,
+  Info,
   PanelLeft,
   Home,
   LayoutDashboard,
@@ -24,7 +25,7 @@ import { usePlan, useConfirm } from '@packages/storage/PlanContext';
 
 interface SidebarProps {
   setCurrentView: (v: 'board' | 'list') => void;
-  setCurrentModule: (m: 'tasks' | 'settings' | 'help' | 'start') => void;
+  setCurrentModule: (m: 'tasks' | 'settings' | 'help' | 'start' | 'about') => void;
   setCurrentScope: (s: 'active' | 'archived') => void;
   openBookmark: (plan: RecentPlan) => void;
   openPlan: () => void;
@@ -322,6 +323,16 @@ export function Sidebar({
             >
               Help
             </button>
+            <div className="h-4 w-[1px] bg-border mx-1" />
+            <button
+              onClick={() => setModule('about')}
+              className={cn(
+                "text-[12px] font-medium transition-all duration-200 px-1 py-0.5 rounded cursor-pointer",
+                currentModule === 'about' ? "text-accent" : "text-text-secondary hover:text-text-primary"
+              )}
+            >
+              About
+            </button>
           </div>
         </div>
       ) : (
@@ -341,6 +352,13 @@ export function Sidebar({
               active={currentModule === 'help'}
               onClick={() => setModule('help')}
               icon={HelpCircle}
+            />
+          </CollapsedActionTooltip>
+          <CollapsedActionTooltip content="About">
+            <CollapsedActionButton 
+              active={currentModule === 'about'}
+              onClick={() => setModule('about')}
+              icon={Info}
             />
           </CollapsedActionTooltip>
         </div>

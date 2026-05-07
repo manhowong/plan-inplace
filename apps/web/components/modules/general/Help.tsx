@@ -1,113 +1,115 @@
+import {Info} from 'lucide-react';
+
 export function Help() {
   return (
     <div className="h-full overflow-y-auto bg-bg p-6 sm:p-10">
-      <div className="max-w-3xl mx-auto space-y-12">
+      <div className="max-w-3xl space-y-12">
+
         {/* Header Section */}
-        <div className="space-y-4 pb-8 border-b border-border">
-          <h1 className="text-3xl font-bold text-text-primary tracking-tight">Documentation</h1>
-          <p className="text-text-secondary leading-relaxed">
-            PlainPlan is a local-first task manager. No cloud services, no tracking, and no external servers. All data remains on your physical disk.
+        <div className="space-y-4 pb-8">
+          <h1 className="text-3xl font-bold text-text-primary tracking-tight">Help</h1>
+          
+          <div
+            className="flex items-center gap-3 px-4 py-2 bg-priority-med/10 border border-priority-med/20 rounded-md text-priority-med text-base font-semibold"
+          >
+            <Info className="w-4 h-4 flex-shrink-0" />
+            VS Code extension coming soon. Stay tuned :)
+          </div>
+          
+          <p className="text-xl text-text-primary">
+          <strong>Plan InPlace</strong> is a project planner that 
+          allows you to create and manage <i>portable</i> plans: plans that live with individual projects or anywhere you like. 
+          </p>
+          <p className="pl-5 text-xl text-text-primary">
+            <strong>No setup</strong>. Create a plan and add tasks quickly.<br/>
+            Store data <strong>locally</strong> and <strong>track</strong> with Git, or sync with your cloud services.<br/>
+            Manage tasks with <strong>Kanban, table, and more</strong>.
           </p>
         </div>
 
         {/* Usage Section */}
-        <section className="space-y-8">
-          <h2 className="text-xl font-bold text-text-primary">Usage</h2>
+        <section className="space-y-10">
+          <h2 className="text-2xl font-bold text-text-primary">Quick Start</h2>
           
-          <div className="space-y-6">
+          <div className="space-y-10">
+
             <div className="space-y-2">
-              <h3 className="text-md font-bold text-text-primary">Create a plan</h3>
-              <ol className="list-decimal pl-5 text-sm text-text-secondary space-y-2">
-                <li>Launch the app and click "Create a Plan".</li>
-                <li>Select a folder on your computer using the directory picker.</li>
-                <li>A directory named <code>PlainPlan</code> will be created to store your data.</li>
+              <h3 className="text-base font-bold text-text-primary">Create a plan</h3>
+              <ol className="list-decimal pl-5 text-base text-text-secondary space-y-2">
+                <li>Click <strong>Create a Plan</strong>.</li>
+                <li>Select a location on your computer (e.g., your project folder).</li>
+                <li>A folder named <code>/plan-inplace</code> will be created to store your data.</li>
               </ol>
             </div>
 
             <div className="space-y-2">
-              <h3 className="text-md font-bold text-text-primary">Add a task</h3>
-              <ol className="list-decimal pl-5 text-sm text-text-secondary space-y-2">
-                <li>Click the "+" button in the header or sidebar.</li>
-                <li>Or press <code>N</code> on your keyboard for quick entry.</li>
-                <li>Fill in the fields and click "Create". Success writes directly to your local file.</li>
-              </ol>
+              <h3 className="text-base font-bold text-text-primary">Add a task</h3>
+              <p className="list-decimal text-base text-text-secondary space-y-2">Go to <strong>Active Tasks</strong>, then:</p>
+              <p className="pl-5 text-base text-text-secondary">
+              (Option 1) Use the <strong>Quick add</strong> input in the header for fast entry.
+              </p>
+              <p className="pl-5 text-base text-text-secondary">
+              (Option 2) Click <strong>Details</strong> in the header or the <strong>Plus</strong> icon in Board columns to open the full task dialog. Fill in the fields and click <strong>Add Task</strong>.
+              </p>
+
             </div>
 
             <div className="space-y-2">
-              <h3 className="text-md font-bold text-text-primary">Kanban and table</h3>
-              <p className="text-sm text-text-secondary">
-                Toggle between view types in the sidebar. <strong>Board</strong> view is for visual tracking; <strong>Table</strong> view is optimized for bulk data management.
+              <h3 className="text-base font-bold text-text-primary">Kanban Board and Table views</h3>
+              <p className="text-base text-text-secondary">
+                Toggle between views in the sidebar.
               </p>
             </div>
 
             <div className="space-y-2">
-              <h3 className="text-md font-bold text-text-primary">Customize task fields</h3>
-              <p className="text-sm text-text-secondary">
-                Go to <strong>Settings</strong> to define custom metadata (dropdowns, text, numbers). These are stored in <code>metadata.json</code> and apply to all tasks in the plan.
+              <h3 className="text-base font-bold text-text-primary">Customize task fields</h3>
+              <p className="text-base text-text-secondary">
+                Go to <strong>Plan Settings</strong> to define task metadata (e.g., add new fields). These are stored in <code>metadata.json</code> and apply to all tasks in the plan.
+              </p>
+              <p className="text-base text-text-secondary">
+                To customize the order or visibility of table columns, or how tasks are grouped on Kanban, 
+                go to <strong>Active Tasks</strong> and press <strong>Table Settings</strong> or <strong>Table Settings</strong>.
               </p>
             </div>
           </div>
         </section>
 
         {/* FAQ Section */}
-        <section className="space-y-8">
-          <h2 className="text-xl font-bold text-text-primary">FAQ</h2>
+        <section className="space-y-10 pb-12">
+          <h2 className="text-2xl font-bold text-text-primary">FAQ</h2>
           
-          <div className="space-y-6">
+          <div className="space-y-10">
             <div className="space-y-2">
-              <p className="font-bold text-text-primary text-sm">Where is my plan stored?</p>
-              <p className="text-sm text-text-secondary leading-relaxed">
-                In the folder you picked during setup. It is located at <code>PlainPlan/plan.json</code> (tasks) and <code>PlainPlan/metadata.json</code> (configuration).
+              <p className="font-bold text-text-primary text-base">Where is my plan stored?</p>
+              <p className="text-base text-text-secondary leading-relaxed">
+                In the folder you picked during plan creation. 
+                It is located at <code>/plan-inplace/plan.json</code> (tasks) and <code>/plan-inplace/metadata.json</code> (configuration).
               </p>
             </div>
 
             <div className="space-y-2">
-              <p className="font-bold text-text-primary text-sm">Can I track my plan with Git or cloud services?</p>
-              <p className="text-sm text-text-secondary leading-relaxed">
-                Yes. Since the data is stored in standard JSON format, you can initialize a Git repository in the plan folder or save the plan inside a Dropbox, iCloud, or Google Drive folder for syncing.
+              <p className="font-bold text-text-primary text-base">Can I move the <code>/plan-inplace</code> folder?</p>
+              <p className="text-base text-text-secondary leading-relaxed">
+                Yes. You can move the folder to any location, 
+                but the App won't know the folder's new location and you won't be able to open it from the Recent Plans list.<br/>
+                Simply press <strong>Open a Plan</strong> to open it and add it back to the Recent Plans list.
               </p>
             </div>
 
             <div className="space-y-2">
-              <p className="font-bold text-text-primary text-sm">Can I share my plan and collaborate with others?</p>
-              <p className="text-sm text-text-secondary leading-relaxed">
+              <p className="font-bold text-text-primary text-base">Can I track my plan with Git or cloud services?</p>
+              <p className="text-base text-text-secondary leading-relaxed">
+                Yes. Since the data is stored in standard JSON format, 
+                you can initialize a Git repository in the plan folder or 
+                save the plan inside a cloud folder (e.g., Google Drive) for syncing.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <p className="font-bold text-text-primary text-base">Can I share my plan and collaborate with others?</p>
+              <p className="text-base text-text-secondary leading-relaxed">
                 Yes. Multiple users can edit the same plan if they have shared access to the filesystem (e.g., via a shared cloud folder or Git).
               </p>
-            </div>
-
-            <div className="space-y-2">
-              <p className="font-bold text-text-primary text-sm">How do I make plans with AI?</p>
-              <p className="text-sm text-text-secondary leading-relaxed">
-                PlainPlan does not have built-in AI. You can generate task lists using external AI tools and manually append the JSON structure to your <code>plan.json</code>.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* About Section */}
-        <section className="space-y-8 pb-12">
-          <h2 className="text-xl font-bold text-text-primary">About</h2>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-            <div className="flex flex-col gap-1">
-              <span className="font-bold text-text-primary">Source Code</span>
-              <a href="https://github.com/mh-wong/plainplan" target="_blank" rel="noreferrer" className="text-accent hover:underline">github.com/mh-wong/plainplan</a>
-            </div>
-            <div className="flex flex-col gap-1">
-              <span className="font-bold text-text-primary">Suggestions</span>
-              <a href="https://github.com/mh-wong/plainplan/issues" target="_blank" rel="noreferrer" className="text-accent hover:underline">Report an issue</a>
-            </div>
-            <div className="flex flex-col gap-1">
-              <span className="font-bold text-text-primary">License</span>
-              <span className="text-text-secondary">MIT License</span>
-            </div>
-            <div className="flex flex-col gap-1">
-              <span className="font-bold text-text-primary">Developer</span>
-              <span className="text-text-secondary">MH Wong</span>
-            </div>
-            <div className="flex flex-col gap-1">
-              <span className="font-bold text-text-primary">Sponsor Me</span>
-              <a href="https://github.com/sponsors/mh-wong" target="_blank" rel="noreferrer" className="text-accent hover:underline">Support on GitHub</a>
             </div>
           </div>
         </section>

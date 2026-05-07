@@ -76,7 +76,7 @@ export function Header({
     setTaskTitle('');
   };
 
-  if (currentModule === 'help' || currentModule === 'start') {
+  if (currentModule === 'help' || currentModule === 'start' || currentModule === 'about') {
     return null;
   }
 

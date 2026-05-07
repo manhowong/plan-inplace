@@ -7,7 +7,7 @@ export function useViewState() {
     return 'dark';
   });
 
-  const [currentModule, setCurrentModule] = useState<'tasks' | 'settings' | 'help' | 'start'>(() => {
+  const [currentModule, setCurrentModule] = useState<'tasks' | 'settings' | 'help' | 'start' | 'about'>(() => {
     return (localStorage.getItem('plan-inplace_module') as any) || 'start';
   });
 

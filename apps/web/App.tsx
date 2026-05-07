@@ -11,6 +11,7 @@ import { Header } from './components/layout/Header';
 import { AppDialogs } from './components/layout/AppDialogs';
 import { Start } from './components/modules/general/Start';
 import { Help } from './components/modules/general/Help';
+import { About } from './components/modules/general/About';
 import { BoardView } from './components/modules/tasks/BoardView';
 import { TableView } from './components/modules/tasks/TableView';
 import { RecentPlan } from '@packages/types/shared';
@@ -85,7 +86,7 @@ function AppInner({
   } = usePlan();
 
   const [isMobile, setIsMobile] = useState(false);
-  const [pendingNavigation, setPendingNavigation] = useState<{ module?: 'tasks' | 'settings' | 'help' | 'start', scope?: 'active' | 'archived', view?: 'board' | 'list', bookmark?: RecentPlan, action?: 'open' | 'create' } | null>(null);
+  const [pendingNavigation, setPendingNavigation] = useState<{ module?: 'tasks' | 'settings' | 'help' | 'start' | 'about', scope?: 'active' | 'archived', view?: 'board' | 'list', bookmark?: RecentPlan, action?: 'open' | 'create' } | null>(null);
 
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
@@ -131,6 +132,7 @@ function AppInner({
   // --- Render Mappings (UI Modules (main screen) to be rendered: Help, Start, PlanSettings, BoardView, TableView ) ---
   const Screen = useMemo(() => {
     if (currentModule === 'help') return <Help />;
+    if (currentModule === 'about') return <About />;
     if (!isReady || !metadata || currentModule === 'start') return <div className="h-full"><Start /></div>;
     
     if (currentModule === 'settings') {
