@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Plan InPlace</title>
+    <script type="module" src="/apps/web/lib/installApp.js"></script>
     <link rel="icon" type="image/png" href="/assets/images/icon.png" />
     <link rel="stylesheet" href="/apps/web/index.css">
+    <link rel="manifest" href="/apps/web/manifest.webmanifest">
   </head>
   <body class="bg-bg text-text-primary font-sans flex flex-col min-h-screen">
     <!-- Landing page content -->
@@ -38,14 +40,13 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
               </div>
               <div class="space-y-2">
-                <h3 class="text-xl font-semibold text-text-primary">Launch in Browser</h3>
+                <h3 class="text-xl font-semibold text-text-primary">Launch in Browser *</h3>
                 <p class="text-base text-text-secondary">
                   All data stays local.
                 </p>
-                <p class="text-xs text-text-secondary">
-                  For Chromium browsers <br/>
-                  (e.g. Chrome, Edge, Brave, Opera)
-                </p>
+                <div id="installApp" class="hidden w-fit text-accent bg-transparent border border-accent py-1 px-2 rounded-sm hover:bg-accent hover:text-text-primary">
+                  Optional: Install offline app
+                </div>
               </div>
             </a>
           </div>
@@ -88,8 +89,12 @@
               </div>
             </div>
           </div>
-
         </div>
+
+        <div class="relative text-sm text-text-secondary">
+          * Supports Chromium-based browsers (e.g. Chrome, Edge, Brave)<br/>
+        </div>
+
       </div>
     </main>
 

@@ -8,7 +8,7 @@
     "fileSystem"
   ],
   "action": {
-    "default_popup": "index.html"
+    "default_popup": "app.html"
   },
   "icons": {
     "16": "assets/images/icon.png",

@@ -1,10 +1,11 @@
 {
+  "id": "/plan-inplace",
   "name": "Plan InPlace",
   "short_name": "Plan InPlace",
-  "description": "A simple planning and task management tool.",
-  "start_url": "index.html",
+  "description": "A lightweight, open-source project planning tool.",
+  "start_url": "/app.html",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#000000",
   "theme_color": "#000000",
   "icons": [
     {
