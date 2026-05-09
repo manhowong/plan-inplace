@@ -1,6 +1,6 @@
 {
   "name": "plan-inplace",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "icon": "assets/images/icon.png",
   "description": "Kanban, Git control, and more",
   "private": true,
@@ -13,7 +13,7 @@
     "clean": "rm -rf dist dist-extension",
     "lint": "tsc --noEmit"
   },
-  "publisher": "manhowong",
+  "publisher": "manho-wong",
   "engines": {
     "vscode": "^1.90.0"
   },
