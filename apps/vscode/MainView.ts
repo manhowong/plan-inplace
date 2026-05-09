@@ -249,11 +249,11 @@ export class MainView {
     const webview = this._panel.webview;
     const nonce = getNonce();
     const distPath = vscode.Uri.joinPath(this._extensionUri, 'dist');
-    const indexPath = path.join(distPath.fsPath, 'index.html');
+    const indexPath = path.join(distPath.fsPath, 'app.html');
 
     try {
       if (!fs.existsSync(indexPath)) {
-        throw new Error('Missing dist/index.html. Build the web app before opening Plan InPlace.');
+        throw new Error('Missing dist/app.html. Build the web app before opening Plan InPlace.');
       }
       let html = fs.readFileSync(indexPath, 'utf8');
       const baseUri = webview.asWebviewUri(distPath);

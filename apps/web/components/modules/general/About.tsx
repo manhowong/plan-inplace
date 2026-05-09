@@ -19,7 +19,7 @@ export function About() {
 
         <div className="space-y-8">
           <section className="space-y-2">
-            <h2 className="text-base font-bold uppercase">Source</h2>
+            <h2 className="text-base font-bold uppercase">Source Code</h2>
             <a 
               href="https://github.com/manhowong/plan-inplace" 
               target="_blank" 
@@ -46,12 +46,21 @@ export function About() {
             <h2 className="text-base font-bold uppercase">Support</h2>
             <div className="space-y-2">
               <a 
+                href="https://github.com/manhowong/plan-inplace/issues/new?template=become-a-contributor.md" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="text-base text-accent hover:underline font-medium"
+              >
+                Become a contributor
+              </a>
+              <br/>
+              <a 
                 href="https://github.com/manhowong/plan-inplace/issues/new" 
                 target="_blank" 
                 rel="noreferrer" 
                 className="text-base text-accent hover:underline font-medium"
               >
-                Suggest or report an issue
+                Suggest a feature / Report an issue
               </a>
               <br/>
               <a 
@@ -84,6 +93,7 @@ export function About() {
             <div className="space-y-1">
               <p className="text-base text-text-primary font-medium">Web App (Beta)</p>
               <p className="text-base text-text-secondary">VS Code Extension (Coming Soon)</p>
+              <p className="text-base text-text-secondary">Chrome Extension (Coming Soon)</p>
             </div>
           </section>
         </div>
