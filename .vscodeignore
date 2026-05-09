@@ -16,12 +16,14 @@ index.html
 manifest.webmanifest
 metadata.json
 chrome/**
+assets/images/*
+
+# Keep the images but exclude images/screenshots
+!assets/images/*.png
+assets/images/screenshots/*
 
 # Keep the built extension
 !dist-extension/extension.cjs
-
-# Keep the extension icon assets
-!assets/images/**
 
 #Keep the vscode extension source
 !apps/vscode/**
