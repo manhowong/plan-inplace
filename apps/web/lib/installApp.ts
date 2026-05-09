@@ -14,11 +14,24 @@ window.addEventListener('beforeinstallprompt', (e) => {
   if (btn) btn.style.display = 'block';
 });
 
-// Trigger prompt on click
+window.addEventListener('appinstalled', () => {
+  deferredPrompt = null;
+  if (btn) btn.style.display = 'none';
+});
+
+// Trigger prompt on click, or fallback to the app page when the prompt is unavailable.
 btn?.addEventListener('click', async () => {
   if (deferredPrompt) {
     await deferredPrompt.prompt();
+    const choiceResult = await deferredPrompt.userChoice;
     deferredPrompt = null;
-    btn.style.display = 'none';
+    if (btn) btn.style.display = 'none';
+    if (choiceResult.outcome === 'accepted') {
+      console.log('PWA install accepted');
+    }
+    return;
   }
+
+  // If the browser did not fire the install prompt on index.html, redirect to the real app entry.
+  window.location.href = '/app.html';
 });

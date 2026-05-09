@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Plan InPlace</title>
-    <script type="module" src="/apps/web/lib/installApp.js"></script>
     <link rel="icon" type="image/png" href="/assets/images/icon.png" />
     <link rel="stylesheet" href="/apps/web/index.css">
     <link rel="manifest" href="/apps/web/manifest.webmanifest">
@@ -45,7 +44,7 @@
                   All data stays local.
                 </p>
                 <div id="installApp" class="hidden w-fit text-accent bg-transparent border border-accent py-1 px-2 rounded-sm hover:bg-accent hover:text-text-primary">
-                  Optional: Install offline app
+                  <strong>Optional</strong>: Install as an app
                 </div>
               </div>
             </a>
@@ -131,6 +130,40 @@
 
       </div>
     </footer>
+    <script type="module">
+      let deferredPrompt = null;
+      const installButton = document.getElementById('installApp');
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(() => {
+          console.warn('PWA service worker registration failed.');
+        });
+      }
+
+      window.addEventListener('beforeinstallprompt', (event) => {
+        event.preventDefault();
+        deferredPrompt = event;
+        installButton?.classList.remove('hidden');
+      });
+
+      installButton?.addEventListener('click', async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (!deferredPrompt) {
+          window.location.href = '/app.html';
+          return;
+        }
+
+        await deferredPrompt.prompt();
+        const choiceResult = await deferredPrompt.userChoice;
+        if (choiceResult.outcome === 'accepted') {
+          console.log('PWA install accepted');
+        }
+        deferredPrompt = null;
+        installButton?.classList.add('hidden');
+      });
+    </script>
   </body>
 </html>
 

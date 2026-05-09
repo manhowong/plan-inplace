@@ -1,11 +1,20 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
+import { VitePWA } from 'vite-plugin-pwa';
 import path from 'path';
 import {defineConfig} from 'vite';
 
 export default defineConfig(({mode}) => {
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [
+      react(),
+      tailwindcss(),
+      VitePWA({
+        registerType: 'prompt',
+        manifest: false,
+        includeAssets: ['apps/web/manifest.webmanifest', 'assets/images/icon-192.png', 'assets/images/icon-512.png'],
+      }),
+    ],
     base: './',
     define: {
       'process.env.NODE_ENV': JSON.stringify(mode),

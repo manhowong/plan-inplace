@@ -4,6 +4,7 @@
   "short_name": "Plan InPlace",
   "description": "A lightweight, open-source project planning tool.",
   "start_url": "/app.html",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",

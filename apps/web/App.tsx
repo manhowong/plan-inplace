@@ -4,6 +4,7 @@
  */
 
 import { useState, useEffect, useRef, useMemo } from 'react';
+import { useRegisterSW } from 'virtual:pwa-register/react';
 import { PlanProvider, usePlan } from '@packages/storage/PlanContext';
 import { PlanSettings, PlanSettingsActions } from './components/modules/settings/PlanSettings';
 import { Sidebar } from './components/layout/Sidebar';
@@ -87,6 +88,18 @@ function AppInner({
 
   const [isMobile, setIsMobile] = useState(false);
   const [pendingNavigation, setPendingNavigation] = useState<{ module?: 'tasks' | 'settings' | 'help' | 'start' | 'about', scope?: 'active' | 'archived', view?: 'board' | 'list', bookmark?: RecentPlan, action?: 'open' | 'create' } | null>(null);
+  const [showOfflineReady, setShowOfflineReady] = useState(false);
+  const [showUpdateAvailable, setShowUpdateAvailable] = useState(false);
+
+  const { updateServiceWorker } = useRegisterSW({
+    onOfflineReady() {
+      setShowOfflineReady(true);
+    },
+    onNeedRefresh() {
+      setShowUpdateAvailable(true);
+    },
+    registerType: 'prompt',
+  });
 
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
@@ -240,6 +253,43 @@ function AppInner({
            {Screen}
         </main>
       </div>
+
+      {showOfflineReady && (
+        <div className="fixed bottom-4 right-4 z-[100] max-w-sm rounded-xl border border-border bg-card px-4 py-3 shadow-xl">
+          <div className="flex items-start gap-3">
+            <div className="flex-1">
+              <p className="text-sm font-semibold text-text-primary">Offline ready</p>
+              <p className="mt-1 text-xs text-text-secondary">The app assets are cached for offline use.</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowOfflineReady(false)}
+              className="text-sm text-text-secondary hover:text-text-primary"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {showUpdateAvailable && (
+        <div className="fixed bottom-4 left-4 z-[100] max-w-sm rounded-xl border border-border bg-card px-4 py-3 shadow-xl">
+          <div className="flex flex-col gap-3">
+            <div>
+              <p className="text-sm font-semibold text-text-primary">New version available</p>
+              <p className="mt-1 text-xs text-text-secondary">A new version is ready. Refresh to update now.</p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Button size="sm" onClick={() => updateServiceWorker(true)}>
+                Update
+              </Button>
+              <Button size="sm" variant="secondary" onClick={() => setShowUpdateAvailable(false)}>
+                Later
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <AppDialogs 
         pendingNavigation={pendingNavigation}
