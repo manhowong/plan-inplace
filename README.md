@@ -29,7 +29,7 @@ The extension provides two interfaces:
 
 - To open it, press the Plan InPlace icon on the sidebar.
 
-    ![sidebar-icon](https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/sidebar-icon.png)
+    <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/sidebar-icon.png" width="200">
 
 - To create a plan in the current workspace, press **Create a Plan**.
     - A folder (`plan-inplace`) will be created in the current workspace. Your plan data will be stored there.
