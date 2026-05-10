@@ -260,11 +260,12 @@ export class MainView {
       const cspSource = webview.cspSource;
       const webviewUri = baseUri.toString();
       const baseTag = `<base href="${webviewUri}/">`;
-      const csp = `<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${cspSource} ${webviewUri} https: data:; script-src 'nonce-${nonce}' 'unsafe-eval'; style-src ${cspSource} ${webviewUri} 'unsafe-inline' https:; font-src ${cspSource} ${webviewUri} https: data:;">`;
+      // Use only cspSource in CSP - it handles vscode-resource URIs correctly
+      const csp = `<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${cspSource} https: data:; script-src ${cspSource} 'nonce-${nonce}' 'unsafe-eval'; style-src ${cspSource} 'unsafe-inline' https:; font-src ${cspSource} https: data:;">`;
       const scriptInjection = `
         <script nonce="${nonce}">
-          const vscode = acquireVsCodeApi();
-          window.vscode = vscode;
+            const vscode = acquireVsCodeApi();
+            window.vscode = vscode;
         </script>
       `;
 
