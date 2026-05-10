@@ -1,8 +1,9 @@
 {
   "name": "plan-inplace",
+  "displayName": "Plan InPlace",
   "version": "1.0.0",
   "icon": "assets/images/icon.png",
-  "description": "Kanban, Git control, and more",
+  "description": "Project planner with Kanban. Git-ready.",
   "private": true,
   "type": "module",
   "scripts": {
@@ -19,7 +20,8 @@
   },
   "main": "./dist-extension/extension.cjs",
   "activationEvents": [
-    "onView:plan-inplace.mainView"
+    "onView:plan-inplace.mainView",
+    "onCommand:plan-inplace.open"
   ],
   "contributes": {
     "viewsContainers": {
