@@ -12,7 +12,32 @@ export default defineConfig(({mode}) => {
       VitePWA({
         registerType: 'prompt',
         manifest: false,
-        includeAssets: ['apps/web/manifest.webmanifest', 'assets/images/icon-192.png', 'assets/images/icon-512.png'],
+        includeAssets: [
+          'apps/web/manifest.webmanifest',
+          'assets/images/icon.png',
+          'assets/images/icon-192.png',
+          'assets/images/icon-512.png',
+          'assets/images/logo.png',
+          'assets/images/logo-white.png',
+        ],
+        workbox: {
+          runtimeCaching: [
+            {
+              urlPattern: /^https?:\/\/.*\/assets\/.*\.(?:png|jpg|jpeg|svg|webp|gif)$/i,
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'image-assets',
+                expiration: {
+                  maxEntries: 120,
+                  maxAgeSeconds: 60 * 60 * 24 * 30,
+                },
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+              },
+            },
+          ],
+        },
       }),
     ],
     base: './',
