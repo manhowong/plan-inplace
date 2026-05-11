@@ -51,7 +51,7 @@ export function About() {
                 rel="noreferrer" 
                 className="text-base text-accent hover:underline font-medium"
               >
-                Become a contributor
+                Pull request
               </a>
               <br/>
               <a 
@@ -91,8 +91,8 @@ export function About() {
           <section className="space-y-2">
             <h2 className="text-base font-bold uppercase">Versions</h2>
             <div className="space-y-1">
-              <p className="text-base text-text-primary font-medium">Web App (Beta)</p>
-              <p className="text-base text-text-secondary">VS Code Extension (Coming Soon)</p>
+              <p className="text-base text-text-primary font-medium">Web App</p>
+              <p className="text-base text-text-secondary">[VS Code Extension](https://marketplace.visualstudio.com/items?itemName=manho-wong.plan-inplace)</p>
               <p className="text-base text-text-secondary">Chrome Extension (Coming Soon)</p>
             </div>
           </section>

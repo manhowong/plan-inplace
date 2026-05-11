@@ -5,6 +5,11 @@
 - [How to Use](#how-to-use)
   - [Sidebar (VS Code)](#sidebar-vs-code)
   - [Main Interface](#main-interface)
+    - [Launch the interface in VS Code](#launch-the-interface-in-vs-code)
+    - [Create or open a plan](#create-or-open-a-plan)
+    - [Add a task](#add-a-task)
+    - [Customize task fields](#customize-task-fields)
+    - [View modes](#view-modes)
 - [FAQs](#faqs)
 - [About](#about)
 
@@ -20,9 +25,11 @@
 - **AI-ready**: Data is stored in standard JSON for easy LLM integration.
 
 **Kanban view (grouped by task status):**
+
 <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/kanban-view.png">
 
 **Table view:**
+
 <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/table-view.png">
 
 ### Installation
@@ -42,6 +49,7 @@
 Use the sidebar in VS Code for quick plan management.
 
 - Click the **Plan InPlace icon** <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/icon-192.png" height="25"> in the "Activity Bar" (left of window):
+    
     <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/sidebar-icon.png" height="180">
 
 
@@ -53,9 +61,7 @@ Use the sidebar in VS Code for quick plan management.
 
 Use the main interface for advanced features. Identical in both VS Code and the web app.
 
-<details open>
-
-**<summary>Launch the interface in VS Code</summary>**
+#### Launch the interface in VS Code
 
 3 ways to launch the full interface:
 
@@ -63,11 +69,7 @@ Use the main interface for advanced features. Identical in both VS Code and the 
 - **Command Palette**: `>Plan InPlace: Open Plan InPlace App`
 - **VS Code Sidebar**: Open Plan InPlace Sidebar > Click **Open Full App**.
 
-</details>
-
-<details open>
-
-**<summary>Create or open a plan</summary>**
+#### Create or open a plan
 
 You can create or open a plan **anywhere on your machine**:
 - Click **Create a Plan** > select a location. This initializes a new plan and creates a **`plan-inplace`** folder in the selected location.
@@ -75,26 +77,20 @@ You can create or open a plan **anywhere on your machine**:
 
 Viewed plans are added to the **Recent Plans** list for easy access.
 
-</details>
-
-<details open>
-
-**<summary>Add a task</summary>**
+#### Add a task
 
 1. Go to **Active Tasks**
-<img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/active-tasks.png" width="30%">
 
-1. Add a task via 3 options:
+    <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/active-tasks.png" width="30%">
+
+2. Add a task via 3 options:
 - **Quick add** input in the header.
 - **Details** button in the header.
 - **Plus icon** in Board view (Kanban).
-<img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/add-task.png" width="70%">
 
-</details>
+    <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/add-task.png" width="70%">
 
-<details open>
-
-**<summary>Customize task fields</summary>**
+#### Customize task fields
 
 Each task has these default fields: **`Title`, `Notes`, `Tags`, `Status`, `Priority`, `Due Date`**.
 
@@ -102,37 +98,36 @@ You can customize **`Status`** options or add more fields in **Plan Settings**.
 
 Customized task fields only apply to one plan. To use the same settings from another plan, click **Import from Another Plan...** .
 
-</details>
-
-<details open>
-
-**<summary>View modes</summary>**
+#### View modes
 
 Toggle between Board (Kanban) and Table views in the app sidebar:
+
 <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/toggle-view.png" width="25%">
 
 Advanced settings:
 - **Board Settings**: Toggle between grouping by task status (Classical Kanban) or by task priority. (To customize status order and options, see next section.)
 - **Table Settings**: Customize column order and visibility.
 
-</details>
-
 ---
 
 ## FAQs
 
 **Where is my plan stored?**
+
 It is stored in standard JSON in your current workspace or selected location:
 - **`/plan-inplace/plan.json`** (plan details, e.g. tasks)
 - **`/plan-inplace/metadata.json`** (configurations)
 
-**Can I move the `plan-inplace` folder?**  
+**Can I move the `plan-inplace` folder?**
+
 Yes. You can move it anywhere. If the app loses the link, just click **Open a Plan** and select the folder in its new location to restore it to the Recent Plans list.
 
 **Can I track my plan with Git or Cloud services?**
+
 Yes. The data (JSON) structure is designed for easy versioning and conflict resolution. Commit the folder to Git for versioning, or store it in a synced folder (Dropbox, OneDrive, etc.) for cross-device access.
 
-**Can I collaborate with others?**  
+**Can I collaborate with others?**
+  
 Yes. The app allows for concurrent file access. Simply store the plan folder in a shared cloud drive. For asynchronous collaboration, commit it to your Git repository. Team members can pull, edit, and push changes just like code.
 
 ---
