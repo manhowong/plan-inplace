@@ -5,12 +5,13 @@
 
 export function initDeviceGuard() {
   const launchLink = document.getElementById('launchApp');
+  const installButton = document.getElementById('installApp');
   const guardOverlay = document.getElementById('guard-overlay');
   const guardContent = document.getElementById('guard-content');
 
-  if (!launchLink || !guardOverlay || !guardContent) return;
+  if (!guardOverlay || !guardContent) return;
 
-  launchLink.addEventListener('click', (e) => {
+  const runChecks = (e: MouseEvent) => {
     const isVsCode = !!(window as any).vscode || (window as any).acquireVsCodeApi;
     const isInIframe = window.self !== window.top && !isVsCode;
     const isSupported = 'showDirectoryPicker' in window;
@@ -19,22 +20,28 @@ export function initDeviceGuard() {
 
     if (isInIframe) {
       e.preventDefault();
+      e.stopImmediatePropagation();
       showIframeGuard();
       return;
     }
 
     if (!isSupported) {
       e.preventDefault();
+      e.stopImmediatePropagation();
       showUnsupportedGuard();
       return;
     }
 
     if (isMobile) {
       e.preventDefault();
+      e.stopImmediatePropagation();
       showMobileGuard();
       return;
     }
-  });
+  };
+
+  launchLink?.addEventListener('click', runChecks);
+  installButton?.addEventListener('click', runChecks);
 
   function showIframeGuard() {
     guardContent.innerHTML = `
