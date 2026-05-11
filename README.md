@@ -1,139 +1,148 @@
 **Plan InPlace**
 
 - [Introduction](#introduction)
-- [Installation](#installation)
-- [Quick Start (VS Code)](#quick-start-vs-code)
-  - [Using the VS Code Sidebar](#using-the-vs-code-sidebar)
-  - [Using the Main UI](#using-the-main-ui)
-    - [Create a plan](#create-a-plan)
-    - [Add a task](#add-a-task)
-    - [Kanban board and table views](#kanban-board-and-table-views)
-    - [Customize task fields](#customize-task-fields)
-- [FAQ](#faq)
+  - [Installation](#installation)
+- [How to Use](#how-to-use)
+  - [Sidebar (VS Code)](#sidebar-vs-code)
+  - [Main Interface](#main-interface)
+- [FAQs](#faqs)
 - [About](#about)
 
 
 ## Introduction
 
-**Plan InPlace** is a lightweight, open-source planner for agile projects.
-- **No setup**. Your plan lives inside your project, or anywhere you choose.
-- Keep data **local** or track with **Git** and sync with your **cloud** services.
-- Manage tasks with **Kanban, table, and more**.
-- **AI-ready** JSON data and templates (to be provided in next release). Generate plans for your projects easily and manage them with Plan InPlace. 
+**Plan InPlace** is a lightweight, open-source planner that keeps your plan and your project in one place, integrating project management into your agile workflow.
 
-Kanban view:
+- **No setup**: Create a plan instantly in your current workspace or selected location.
+- **Full data control**: Keep data offline, or sync it with Git and your cloud drive. 
+- **Git-native**: Track and sync tasks along with your Git workflow.
+- **Flexible**: Manage tasks quickly with the VS Code sidebar, or use advanced planning features with Kanban and more.
+- **AI-ready**: Data is stored in standard JSON for easy LLM integration.
 
+**Kanban view (grouped by task status):**
 <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/kanban-view.png">
 
-
-Table view:
-
+**Table view:**
 <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/table-view.png">
 
----
+### Installation
 
-## Installation
-
-**VS Code**: Install via the VS Code Marketplace.
-
-**Web app**: Launch the app at [planinplace.netlify.app](https://planinplace.netlify.app/).
+- **VS Code**: Install from the VS Code Marketplace.
+- **Web App**: Access at [planinplace.netlify.app](https://planinplace.netlify.app/).
+- Both options allow for offline use.
 
 ---
 
-## Quick Start (VS Code)
+## How to Use
 
-> **ATTENTION**:
-> It takes a few seconds for VS Code to activate the extension during startup. The interfaces may not be responsive until the extension is fully activated.
+> **Note (VS Code users)**: It may take a few seconds for the extension to activate upon VS Code startup. If the UI is unresponsive, please wait for activation to complete.
 
-The extension provides two interfaces:
-- Sidebar: Press the Plan InPlace icon on the sidebar.
+### Sidebar (VS Code)
 
-    <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/sidebar-icon.png" width="200">
+Use the sidebar in VS Code for quick plan management.
 
-- Main UI: Launch it using one of the following options:
-    - Press **`Shift+Alt+P`**
-    - Press the button **Open Full App** in the sidebar.
-    - Enter in the **command palette**:
-        
-        ```
-        > Plan InPlace:Open Plan InPlace App
-        ```
+- Click the **Plan InPlace icon** <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/icon-192.png" height="25"> in the "Activity Bar" (left of window):
+    <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/sidebar-icon.png" height="180">
 
-### Using the VS Code Sidebar
 
-- To create a plan in the current workspace, press **Create a Plan**.
-    - A folder (`plan-inplace`) will be created in the current workspace. Your plan data will be stored there.
-- You can then **add tasks** to the plan, **archive tasks**, or **delete archived tasks** quickly using the sidebar.
-- Next time when you open the same workspace, the plan will be loaded automatically.
-- For advanced features, use the main UI (next section).
+- Click **Create a Plan**. This initializes a new plan and creates a **`plan-inplace`** folder in the current workspace to store the plan.
+- **Add, archive, or delete tasks** directly from the sidebar.
+- **Auto-load**: Loads your plan automatically when you open the workspace.
 
-### Using the Main UI
+### Main Interface
 
-#### Create a plan
+Use the main interface for advanced features. Identical in both VS Code and the web app.
 
-1. Click **Create a Plan** in the main UI.
-2. Select a location on your computer (e.g., your project folder).
-3. A folder named `/plan-inplace` will be created to store your data.
+<details open>
 
-#### Add a task
+**<summary>Launch the interface in VS Code</summary>**
+
+3 ways to launch the full interface:
+
+- **Keyboard Shortcut**: `Shift+Alt+P`
+- **Command Palette**: `>Plan InPlace: Open Plan InPlace App`
+- **VS Code Sidebar**: Open Plan InPlace Sidebar > Click **Open Full App**.
+
+</details>
+
+<details open>
+
+**<summary>Create or open a plan</summary>**
+
+You can create or open a plan **anywhere on your machine**:
+- Click **Create a Plan** > select a location. This initializes a new plan and creates a **`plan-inplace`** folder in the selected location.
+- Click **Open a Plan** > select a **`plan-inplace`** folder (or a project folder containing a **`plan-inplace`** folder)
+
+Viewed plans are added to the **Recent Plans** list for easy access.
+
+</details>
+
+<details open>
+
+**<summary>Add a task</summary>**
 
 1. Go to **Active Tasks**
+<img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/active-tasks.png" width="30%">
 
-    <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/active-tasks.png" width="40%">
+1. Add a task via 3 options:
+- **Quick add** input in the header.
+- **Details** button in the header.
+- **Plus icon** in Board view (Kanban).
+<img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/add-task.png" width="70%">
 
-2. Add a task via one of the following options:
-    - **(Option 1)** Use the **Quick add** input in the header for fast entry.
-    - **(Option 2)** Click **Details** in the header. Fill in the details and click **Add Task**.
-    - **(Option 3)** Click the **Plus icon** in Board view. Fill in the details and click **Add Task**.
+</details>
 
-    <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/add-task.png" width="80%">
+<details open>
 
-#### Kanban board and table views
+**<summary>Customize task fields</summary>**
 
-Switch between views using the toggle in the sidebar:
+Each task has these default fields: **`Title`, `Notes`, `Tags`, `Status`, `Priority`, `Due Date`**.
 
-<img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/toggle-view.png" width="40%">
+You can customize **`Status`** options or add more fields in **Plan Settings**.
 
-You can order the tasks or move tasks between status/priority categories by drag-and-drop in the board view. 
+Customized task fields only apply to one plan. To use the same settings from another plan, click **Import from Another Plan...** .
 
-#### Customize task fields
+</details>
 
-Go to **Plan Settings** to define task metadata (e.g., add new fields). These are stored in `metadata.json` and apply to all tasks in the plan.
+<details open>
 
-To customize the order or visibility of table columns, or how tasks are grouped on Kanban, go to **Active Tasks** and press **Table Settings** or **Board Settings**.
+**<summary>View modes</summary>**
+
+Toggle between Board (Kanban) and Table views in the app sidebar:
+<img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/toggle-view.png" width="25%">
+
+Advanced settings:
+- **Board Settings**: Toggle between grouping by task status (Classical Kanban) or by task priority. (To customize status order and options, see next section.)
+- **Table Settings**: Customize column order and visibility.
+
+</details>
 
 ---
 
-## FAQ
+## FAQs
 
 **Where is my plan stored?**
+It is stored in standard JSON in your current workspace or selected location:
+- **`/plan-inplace/plan.json`** (plan details, e.g. tasks)
+- **`/plan-inplace/metadata.json`** (configurations)
 
-In the folder you picked during plan creation. It is located at `/plan-inplace/plan.json` (tasks) and `/plan-inplace/metadata.json` (configuration).
+**Can I move the `plan-inplace` folder?**  
+Yes. You can move it anywhere. If the app loses the link, just click **Open a Plan** and select the folder in its new location to restore it to the Recent Plans list.
 
-**Can I move the `/plan-inplace` folder?**
+**Can I track my plan with Git or Cloud services?**
+Yes. The data (JSON) structure is designed for easy versioning and conflict resolution. Commit the folder to Git for versioning, or store it in a synced folder (Dropbox, OneDrive, etc.) for cross-device access.
 
-Yes. You can move the folder to any location, but the app won't know the folder's new location and you won't be able to open it from the Recent Plans list. Simply press **Open a Plan** to open it and add it back to the Recent Plans list.
-
-**Can I track my plan with Git or cloud services?**
-
-Yes. Since the data is stored in standard JSON format, you can initialize a Git repository in the plan folder or save the plan inside a cloud folder (e.g., Google Drive) for syncing.
-
-**Can I share my plan and collaborate with others?**
-
-Yes. Multiple users can edit the same plan if they have shared access to the filesystem (e.g., via a shared cloud folder or Git).
+**Can I collaborate with others?**  
+Yes. The app allows for concurrent file access. Simply store the plan folder in a shared cloud drive. For asynchronous collaboration, commit it to your Git repository. Team members can pull, edit, and push changes just like code.
 
 ---
 
 ## About
 
-
-**Source**: [github.com/manhowong/plan-inplace](https://github.com/manhowong/plan-inplace)
-
-**Developer**: [@manhowong](https://github.com/manhowong)
-
-**License**: [Apache License 2.0](https://github.com/manhowong/plan-inplace/blob/main/LICENSE)
-
-**Support**:
-
-- [Suggest or report an issue](https://github.com/manhowong/plan-inplace/issues/new)
-- [Sponsor me on GitHub ♥](https://github.com/sponsors/manhowong)
+- **Source**: [GitHub](https://github.com/manhowong/plan-inplace)
+- **License**: [Apache License 2.0](https://github.com/manhowong/plan-inplace/blob/main/LICENSE)
+- **Developer**: [@manhowong](https://github.com/manhowong)
+- **Support**:
+  - [Pull request](https://github.com/manhowong/plan-inplace/issues/new?template=become-a-contributor.md)
+  - [Report an Issue](https://github.com/manhowong/plan-inplace/issues/new)
+  - [Sponsor on GitHub ♥](https://github.com/sponsors/manhowong)
