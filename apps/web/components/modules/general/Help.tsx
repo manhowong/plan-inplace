@@ -12,7 +12,7 @@ export function Help() {
           <p className="text-xl ">
             <strong>Plan InPlace</strong> is a lightweight, open-source planner that keeps your plan and your project in one place, integrating project management into your agile workflow.
           </p>
-          <p className="pl-5 text-xl leading-relaxed">
+          <p className="pl-5 text-base leading-relaxed">
             <strong>No setup</strong>: Create a plan instantly in your current workspace or selected location.<br/>
             <strong>Full data control</strong>: Keep data offline, or sync it with Git and your cloud drive.<br/>
             <strong>Git-native</strong>: Track and sync tasks along with your Git workflow.<br/>

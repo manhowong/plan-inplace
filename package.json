@@ -1,15 +1,15 @@
 {
   "name": "plan-inplace",
   "displayName": "Plan InPlace",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "publisher": "manho-wong",
-  "description": "Project planner with Kanban. Git-native.",
+  "description": "Lightweight project planner and todo app with Kanban boards. Git-native project management for developers, local-first and open-source.",
   "author": {
     "name": "Man Ho Wong",
     "url": "https://github.com/manhowong"
   },
   "categories": ["Other"],
-  "keywords": ["planner", "kanban", "project", "management", "task", "todo"],
+  "keywords": ["planner", "project manager", "kanban", "todo", "task"],
   "icon": "assets/images/icon.png",
   "pricing": "Free",
   "license": "Apache License 2.0",

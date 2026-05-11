@@ -50,7 +50,7 @@ Use the sidebar in VS Code for quick plan management.
 
 - Click the **Plan InPlace icon** <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/icon-192.png" height="25"> in the "Activity Bar" (left of window):
     
-    <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/sidebar-icon.png" height="180">
+    <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/sidebar-icon.png" width="150">
 
 
 - Click **Create a Plan**. This initializes a new plan and creates a **`plan-inplace`** folder in the current workspace to store the plan.
@@ -105,7 +105,7 @@ Toggle between Board (Kanban) and Table views in the app sidebar:
 <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/toggle-view.png" width="25%">
 
 Advanced settings:
-- **Board Settings**: Toggle between grouping by task status (Classical Kanban) or by task priority. (To customize status order and options, see next section.)
+- **Board Settings**: Toggle between grouping by task status (Classical Kanban) or by task priority. To customize status order and options, see [Customize task fields](#customize-task-fields).
 - **Table Settings**: Customize column order and visibility.
 
 ---
