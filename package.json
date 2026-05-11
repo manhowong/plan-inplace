@@ -1,10 +1,29 @@
 {
   "name": "plan-inplace",
   "displayName": "Plan InPlace",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "publisher": "manho-wong",
+  "description": "Project planner with Kanban. Git-native.",
+  "author": {
+    "name": "Man Ho Wong",
+    "url": "https://github.com/manhowong"
+  },
+  "categories": ["Other"],
+  "keywords": ["planner", "kanban", "project", "management", "task", "todo"],
   "icon": "assets/images/icon.png",
-  "description": "Project planner with Kanban. Git-ready.",
-  "private": true,
+  "pricing": "Free",
+  "license": "Apache License 2.0",
+  "bugs": {
+    "url": "https://github.com/manhowong/plan-inplace/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manhowong/plan-inplace.git"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/manhowong"
+  },
+  "homepage": "https://github.com/manhowong/plan-inplace",
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
@@ -14,7 +33,6 @@
     "clean": "rm -rf dist dist-extension",
     "lint": "tsc --noEmit"
   },
-  "publisher": "manho-wong",
   "engines": {
     "vscode": "^1.90.0"
   },
