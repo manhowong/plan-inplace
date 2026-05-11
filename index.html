@@ -34,7 +34,7 @@
             <div class="absolute inset-0 bg-sidebar border border-border rounded-md rotate-[2deg] translate-x-1 translate-y-1 transition-transform duration-300 group-hover:rotate-[4deg]"></div>
             <div class="absolute inset-0 bg-sidebar border border-border rounded-md -rotate-[1deg] -translate-x-0.5 -translate-y-0.5 transition-transform duration-300 group-hover:-rotate-[2deg]"></div>
             
-            <a href="/app.html" class="relative w-full h-full p-8 bg-sidebar border border-border rounded-md text-left hover:bg-card transition-all duration-200 z-10 flex flex-col gap-6 items-start">
+            <a id="launchApp" href="/app.html" class="relative w-full h-full p-8 bg-sidebar border border-border rounded-md text-left hover:bg-card transition-all duration-200 z-10 flex flex-col gap-6 items-start">
               <div class="w-12 h-12 rounded-md bg-accent text-white flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105 group-hover:bg-[#2ebc98]">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
               </div>
@@ -130,7 +130,11 @@
 
       </div>
     </footer>
+    <div id="guard-overlay" class="fixed inset-0 z-[100] bg-bg flex items-center justify-center p-4 font-sans hidden">
+      <div id="guard-content" class="w-full flex items-center justify-center"></div>
+    </div>
     <script type="module">
+      import '/apps/web/lib/deviceGuard.ts';
       let deferredPrompt = null;
       const installButton = document.getElementById('installApp');
 
