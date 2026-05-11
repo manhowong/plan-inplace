@@ -60,7 +60,6 @@ export function Sidebar({
     unlistCurrentPlan,
     removeBookmark,
     directoryName,
-    clearPlan,
   } = usePlan();
 
   const { confirm } = useConfirm();
@@ -304,7 +303,6 @@ export function Sidebar({
             <button
               onClick={() => {
                 setModule('start');
-                clearPlan();
               }}
               className={cn(
                 "text-[12px] font-medium transition-all duration-200 px-1 py-0.5 rounded cursor-pointer",
@@ -342,7 +340,6 @@ export function Sidebar({
               active={currentModule === 'start'}
               onClick={() => {
                 setModule('start');
-                clearPlan();
               }}
               icon={Home}
             />

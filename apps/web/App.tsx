@@ -30,20 +30,8 @@ import { Button } from '@packages/ui/Button';
  */
 
 export default function App() {
-  // --- UI State: Internal ---
-  const [isInIframe, setIsInIframe] = useState(false);
-  
   // --- Refs ---
   const settingsRef = useRef<PlanSettingsActions>(null);
-
-  useEffect(() => {
-    try {
-      const isVsCode = !!(window as any).vscode || (window as any).acquireVsCodeApi;
-      setIsInIframe(window.self !== window.top && !isVsCode);
-    } catch (e) {
-      setIsInIframe(true);
-    }
-  }, []);
 
   return (
     <PlanProvider>
@@ -61,7 +49,6 @@ function AppInner({
 }) {
   const { 
     isReady,
-    isSupported,
     globalTheme,
     currentModule,
     currentView,
@@ -156,7 +143,14 @@ function AppInner({
     <div className={cn("h-screen flex overflow-hidden bg-bg text-text-primary font-sans", globalTheme)}>
       <Sidebar 
         setCurrentView={(v) => confirmNavigation({ view: v }) && setCurrentView(v)}
-        setCurrentModule={(m) => confirmNavigation({ module: m }) && setCurrentModule(m)}
+        setCurrentModule={(m) => {
+          if (confirmNavigation({ module: m })) {
+            setCurrentModule(m);
+            if (m === 'start') {
+              clearPlan();
+            }
+          }
+        }}
         setCurrentScope={(s) => confirmNavigation({ scope: s }) && setCurrentScope(s)}
         openBookmark={(plan) => {
           if (confirmNavigation({ bookmark: plan })) {
