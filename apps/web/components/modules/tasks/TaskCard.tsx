@@ -160,7 +160,7 @@ export const TaskCard = memo(({
           {task.content && (
               <div className='relative group/notes'>
                 <NotepadText className="w-3.5 text-text-secondary"/>
-                <div className='z-100 absolute hidden m-0.5 shadow-lg px-2 py-1 w-50 whitespace-pre-line rounded-md  bg-text-primary text-bg border border-border group-hover/notes:block'>
+                <div className='z-100 absolute hidden m-0.5 shadow-lg px-2 py-1 w-max max-w-58 whitespace-pre-line rounded-md  bg-text-primary text-bg border border-border group-hover/notes:block'>
                   <p className='font-semibold'>Notes:</p>
                   <Linkify options={linkifyOptions}>
                     {task.content}

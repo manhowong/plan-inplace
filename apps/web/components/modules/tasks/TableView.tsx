@@ -72,7 +72,7 @@ export function TableView() {
             {info.row.original.content && (
               <div className='relative group/notes flex-none'>
                 <NotepadText className="w-3 h-3 ml-1 text-text-primary/80 group-hover:text-accent" />
-                <div className='z-100 absolute hidden m-0.5 shadow-lg px-2 py-1 w-50 whitespace-pre-line rounded-md  bg-text-primary text-bg border border-border group-hover/notes:block'>
+                <div className='z-100 absolute hidden m-0.5 shadow-lg px-2 py-1 w-max max-w-[60dvw] whitespace-pre-line rounded-md  bg-text-primary text-bg border border-border group-hover/notes:block'>
                   <p className='font-semibold'>Notes:</p>
                   <Linkify options={linkifyOptions}>
                     {info.row.original.content}
