@@ -1,4 +1,8 @@
 import {Info, ArrowUp} from 'lucide-react';
+import activeTasksImg from '@assets/images/screenshots/active-tasks.png';
+import addTaskImg from '@assets/images/screenshots/add-task.png';
+import viewToggleImg from '@assets/images/screenshots/view-toggle.jpeg';
+import dragDropImg from '@assets/images/screenshots/drag-and-drop.jpeg';
 
 export function Help() {
   return (
@@ -37,6 +41,7 @@ export function Help() {
                 <li><a href="#add-a-task" className="text-accent hover:underline">Add a task</a></li>
                 <li><a href="#customize-task-fields" className="text-accent hover:underline">Customize task fields</a></li>
                 <li><a href="#view-modes" className="text-accent hover:underline">View modes</a></li>
+                <li><a href="#drag-and-drop-tasks" className="text-accent hover:underline">Drag and drop tasks</a></li>
               </ul>
             </li>
             <li><a href="#faqs" className="text-accent hover:underline">FAQs</a></li>
@@ -86,7 +91,7 @@ export function Help() {
               <ol className="list-decimal pl-5 space-y-2">
                 <li>
                   Go to <strong>Active Tasks</strong>.
-                  <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/active-tasks.png" alt="Active Tasks" className="border border-border shadow-md rounded-md mt-2 w-[30%]" />
+                  <img src={activeTasksImg} alt="Active Tasks" className="border border-border shadow-md rounded-md mt-2 w-50" />
                 </li>
                 <li>Add a task via 3 options:
                   <ul className="list-disc pl-5 mt-2 space-y-2">
@@ -94,7 +99,7 @@ export function Help() {
                     <li><strong>Details</strong> button in the header.</li>
                     <li><strong>Plus icon</strong> in Board view (Kanban).</li>
                   </ul>
-                  <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/add-task.png" alt="Add task options" className="border border-border shadow-md rounded-md mt-2 w-[70%]" />
+                  <img src={addTaskImg} alt="Add task options" className="border border-border shadow-md rounded-md mt-2 w-90" />
                 </li>
               </ol>
             </div>
@@ -117,12 +122,20 @@ export function Help() {
               <p>
                 Toggle between Board (Kanban) and Table views in the app sidebar.
               </p>
-              <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/toggle-view.png" alt="Toggle view" className="border border-border shadow-md rounded-md w-[25%]" />
+              <img src={viewToggleImg} alt="Toggle view" className="border border-border shadow-md rounded-md w-50" />
               <p className=" ">Advanced settings:</p>
               <ul className="list-disc pl-5   space-y-2">
                 <li><strong>Board Settings</strong>: Toggle between grouping by task status (Classical Kanban) or by task priority. (To customize status order and options, see Plan Settings.)</li>
                 <li><strong>Table Settings</strong>: Customize column order and visibility.</li>
               </ul>
+            </div>
+
+            <div id="drag-and-drop-tasks" className="space-y-4">
+              <h3 className="text-2xl font-bold ">Drag and drop tasks</h3>
+              <p>
+                In Board view, you can move tasks within and across columns by drag and drop.
+              </p>
+              <img src={dragDropImg} alt="Drag and drop tasks" className="border border-border shadow-md rounded-md w-120" />
             </div>
 
           </div>
