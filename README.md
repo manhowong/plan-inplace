@@ -102,7 +102,7 @@ Customized task fields only apply to one plan. To use the same settings from ano
 
 Toggle between Board (Kanban) and Table views in the app sidebar:
 
-<img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/toggle-view.png" width="25%">
+<img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/view-toggle.jpeg" width="25%">
 
 Advanced settings:
 - **Board Settings**: Toggle between grouping by task status (Classical Kanban) or by task priority. To customize status order and options, see [Customize task fields](#customize-task-fields).
