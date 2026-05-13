@@ -10,6 +10,7 @@
     - [Add a task](#add-a-task)
     - [Customize task fields](#customize-task-fields)
     - [View modes](#view-modes)
+    - [Drag and drop tasks](#drag-and-drop-tasks)
 - [FAQs](#faqs)
 - [About](#about)
 
@@ -50,7 +51,7 @@ Use the sidebar in VS Code for quick plan management.
 
 - Click the **Plan InPlace icon** <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/icon-192.png" height="25"> in the "Activity Bar" (left of window):
     
-    <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/sidebar-icon.png" width="150">
+    <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/sidebar-icon.png" width="80">
 
 
 - Click **Create a Plan**. This initializes a new plan and creates a **`plan-inplace`** folder in the current workspace to store the plan.
@@ -81,14 +82,14 @@ Viewed plans are added to the **Recent Plans** list for easy access.
 
 1. Go to **Active Tasks**
 
-    <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/active-tasks.png" width="30%">
+    <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/active-tasks.png" width="150">
 
 2. Add a task via 3 options:
 - **Quick add** input in the header.
 - **Details** button in the header.
 - **Plus icon** in Board view (Kanban).
 
-    <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/add-task.png" width="70%">
+    <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/add-task.png" width="300">
 
 #### Customize task fields
 
@@ -102,11 +103,17 @@ Customized task fields only apply to one plan. To use the same settings from ano
 
 Toggle between Board (Kanban) and Table views in the app sidebar:
 
-<img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/view-toggle.jpeg" width="25%">
+<img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/view-toggle.jpeg" width="150">
 
 Advanced settings:
 - **Board Settings**: Toggle between grouping by task status (Classical Kanban) or by task priority. To customize status order and options, see [Customize task fields](#customize-task-fields).
 - **Table Settings**: Customize column order and visibility.
+
+#### Drag and drop tasks
+
+In Board view, you can move tasks within and across columns by drag and drop.
+
+<img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/drag-and-drop.jpeg" alt="Drag and drop tasks" width="350" />
 
 ---
 
@@ -139,5 +146,5 @@ Yes. The app allows for concurrent file access. Simply store the plan folder in 
 - **Developer**: [@manhowong](https://github.com/manhowong)
 - **Support**:
   - [Pull request](https://github.com/manhowong/plan-inplace/issues/new?template=become-a-contributor.md)
-  - [Report an Issue](https://github.com/manhowong/plan-inplace/issues/new)
-  - [Sponsor on GitHub ♥](https://github.com/sponsors/manhowong)
+  - [Report an issue](https://github.com/manhowong/plan-inplace/issues/new)
+  - [Sponsor ♥](https://github.com/sponsors/manhowong)
