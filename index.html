@@ -10,103 +10,210 @@
   </head>
   <body class="bg-bg text-text-primary font-sans flex flex-col min-h-screen">
     <!-- Landing page content -->
-    <main class="flex-1 flex flex-col items-center justify-center px-[6%] py-[8%]">
+    <main class="flex-1 flex flex-col items-center justify-center px-[6%] py-[6%]">
       <div class="max-w-5xl w-full space-y-6">
-        <!-- Header -->
-        <div class="flex items-center gap-10">
-          <img src="/assets/images/logo.png" alt="Plan InPlace Logo" class="h-16 object-contain" />
-        </div>
 
         <!-- Hero Section -->
-        <div class="space-y-6">
-          <p class="text-xl text-text-primary leading-relaxed">
-            A lightweight, open-source planner for agile projects. <br/>
-            <strong>No setup</strong>. Your plan lives inside your project, or anywhere you choose. <br/> 
-            Keep data <strong>offline</strong>, or track with <strong>Git and your cloud</strong>.
-          </p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center pb-4 lg:pb-10">
+          <div class="space-y-6">
+            <img src="/assets/images/logo.png" alt="Plan InPlace Logo" class="h-16 object-contain" />
+            <p class="text-xl text-text-primary"> 
+              A lightweight, open-source task planner. <br/> 
+            </p>
+            <p class="text-xl text-text-primary">             
+              <strong>No setup</strong>. Just choose where to store your data.<br/> 
+              <strong>Full data control</strong>. Keep data offline, or sync it with any cloud for team collaboration. <br/> 
+              <strong>Git-native</strong>. Track tasks along with your Git workflow.
+            </p>
+          </div>
+          
+          <div class="relative">
+            <div id="image-slider" class="relative group aspect-video overflow-hidden rounded-md border border-border bg-sidebar">
+              <div class="absolute inset-0 flex transition-transform duration-700 ease-in-out" id="slider-track" style="width: 300%;">
+                <div class="w-1/3 h-full flex items-center justify-center">
+                  <img src="/assets/images/screenshots/kanban-view.png" class="h-full cursor-zoom-in slider-img" alt="Kanban View" />
+                  <div class="absolute items-center bottom-6 text-base text-text-primary">
+                    Kanban board with drag and drop.
+                  </div>
+                </div>
+                <div class="w-1/3 h-full flex items-center justify-center">
+                  <img src="/assets/images/screenshots/table-view.png" class="h-full cursor-zoom-in slider-img" alt="Table View" />
+                  <div class="absolute items-center bottom-6 text-base text-text-primary">
+                    Table with customizable columns.
+                  </div>     
+                </div>
+                <div class="w-1/3 h-full flex items-center justify-center bg-bg">
+                  <img src="/assets/images/screenshots/customize-fields.png" class="absolute top-1 h-[75%] cursor-zoom-in slider-img" alt="Table View" />
+                  <div class="absolute items-center bottom-6 text-base text-text-primary">
+                    Customizable Kanban and task fields.
+                  </div>     
+                </div>
+              </div>
+              
+              <!-- Navigation -->
+              <button id="slider-prev" class="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-accent/50 text-white hover:bg-accent/80 z-10" aria-label="Previous slide">  
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+              </button>
+              <button id="slider-next" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-accent/50 text-white hover:bg-accent/80 z-10" aria-label="Next slide">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+
+              <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                <div class="w-1.5 h-1.5 rounded-full bg-accent slider-dot transition-all duration-300" data-index="0"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-text-secondary/20 slider-dot transition-all duration-300" data-index="1"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-text-secondary/20 slider-dot transition-all duration-300" data-index="1"></div>
+              </div>
+            </div>
+
+            <!-- Lightbox Modal -->
+            <div id="lightbox" class="fixed inset-0 bg-bg/95 backdrop-blur-sm z-[200] hidden items-center justify-center p-4 cursor-zoom-out">
+              <div class="relative w-full max-w-7xl h-full flex flex-col items-center justify-center">
+                <div class="absolute top-0 right-0 p-4">
+                   <button id="lightbox-close" class="text-text-secondary hover:text-text-primary flex items-center gap-2 text-xl">
+                    Close 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                  </button>
+                </div>
+                <img id="lightbox-img" src="" class="max-w-full max-h-[80vh] object-contain rounded border border-border" />
+              </div>
+            </div>
+
+            <script>
+              (function() {
+                const slider = document.getElementById('image-slider');
+                const track = document.getElementById('slider-track');
+                const dots = document.querySelectorAll('.slider-dot');
+                const prevBtn = document.getElementById('slider-prev');
+                const nextBtn = document.getElementById('slider-next');
+                const lightbox = document.getElementById('lightbox');
+                const lightboxImg = document.getElementById('lightbox-img');
+                const lightboxClose = document.getElementById('lightbox-close');
+                const sliderImgs = document.querySelectorAll('.slider-img');
+
+                let currentSlide = 0;
+                const totalSlides = 3;
+                let interval;
+
+                const updateSlider = () => {
+                  track.style.transform = `translateX(-${currentSlide * 100/3}%)`;
+                  dots.forEach((dot, index) => {
+                    const isActive = index === currentSlide;
+                    dot.classList.toggle('bg-accent', isActive);
+                    dot.classList.toggle('bg-text-secondary/20', !isActive);
+                    dot.classList.toggle('w-4', isActive);
+                    dot.classList.toggle('w-1.5', !isActive);
+                  });
+                };
+
+                const nextSlide = () => {
+                  currentSlide = (currentSlide + 1) % totalSlides;
+                  updateSlider();
+                };
+
+                const prevSlide = () => {
+                  currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                  updateSlider();
+                };
+
+                const openLightbox = (src) => {
+                  lightboxImg.src = src;
+                  lightbox.classList.replace('hidden', 'flex');
+                  document.body.style.overflow = 'hidden';
+                };
+
+                const closeLightbox = () => {
+                  lightbox.classList.replace('flex', 'hidden');
+                  document.body.style.overflow = '';
+                };
+
+                // Event Listeners
+                prevBtn.addEventListener('click', prevSlide);
+                nextBtn.addEventListener('click', nextSlide);
+                
+                sliderImgs.forEach(img => {
+                  img.addEventListener('click', () => openLightbox(img.src));
+                });
+
+                lightbox.addEventListener('click', (e) => {
+                  if (e.target === lightbox || e.target.closest('#lightbox-close')) closeLightbox();
+                });
+
+                document.addEventListener('keydown', (e) => {
+                  if (e.key === 'Escape') closeLightbox();
+                });
+
+              })();
+            </script>
+          </div>
         </div>
         
         <!-- Platform Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 items-start">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
           
-          <!-- Web App Card Stack -->
-          <div class="relative h-full group">
-            <div class="absolute inset-0 bg-sidebar border border-border rounded-md rotate-[2deg] translate-x-1 translate-y-1 transition-transform duration-300 group-hover:rotate-[4deg]"></div>
-            <div class="absolute inset-0 bg-sidebar border border-border rounded-md -rotate-[1deg] -translate-x-0.5 -translate-y-0.5 transition-transform duration-300 group-hover:-rotate-[2deg]"></div>
-            
-            <a id="launchApp" href="/app.html" class="relative w-full h-full p-8 bg-sidebar border border-border rounded-md text-left hover:bg-card transition-all duration-200 z-10 flex flex-col gap-6 items-start">
-              <div class="w-12 h-12 rounded-md bg-accent text-white flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105 group-hover:bg-[#2ebc98]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-              </div>
-              <div class="space-y-2">
-                <h3 class="text-xl font-semibold text-text-primary">Launch in Browser *</h3>
-                <p class="text-base text-text-secondary">
+          <!-- Web App Card -->
+          <a id="launchApp" href="/app.html" class="flex gap-6 p-6 bg-transparent border border-border rounded-md text-left hover:border-accent hover:bg-sidebar transition-all duration-200 items-start group">
+            <div class="w-12 h-12 rounded-md bg-accent text-white flex items-center justify-center shrink-0 transition-transform duration-200 mt-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            </div>
+            <div class="space-y-4 flex-1">
+              <div class="space-y-1">
+                <h3 class="text-lg font-semibold text-text-primary">Launch in Browser *</h3>
+                <p class="text-sm text-text-secondary leading-relaxed">
                   All data stays local.
                 </p>
-                <div id="installApp" class="hidden w-fit text-accent bg-transparent border border-accent py-1 px-2 rounded-sm hover:bg-accent hover:text-text-primary">
-                  <strong>Optional</strong>: Install as an app
-                </div>
               </div>
-            </a>
-          </div>
+              <div id="installApp" class="hidden w-fit text-[11px] font-bold uppercase tracking-wider text-accent border border-accent/20 py-1 px-2 rounded-sm hover:bg-accent hover:text-white transition-all cursor-pointer">
+                Install as an app
+              </div>
+            </div>
+          </a>
 
-          <!-- VS Code Card Stack -->
-          <div class="relative h-full group">
-            <div class="absolute inset-0 bg-sidebar border border-border rounded-md rotate-[-2deg] translate-x-0.5 translate-y-1 transition-transform duration-300 group-hover:rotate-[-4deg]"></div>
-            <div class="absolute inset-0 bg-sidebar border border-border rounded-md rotate-[1deg] -translate-x-1 -translate-y-0.5 transition-transform duration-300 group-hover:rotate-[2deg]"></div>
-            
-            <a href="https://marketplace.visualstudio.com/items?itemName=manho-wong.plan-inplace" target="_blank" rel="noreferrer" class="relative w-full h-full p-8 bg-sidebar border border-border rounded-md text-left hover:bg-card transition-all duration-200 z-10 flex flex-col gap-6 items-start">
-              <div class="w-12 h-12 rounded-md bg-accent text-white flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105 group-hover:bg-[#2ebc98]">
-                <svg width="24" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M15.434 1.72887L12.14 0.144875C12.002 0.078875 11.855 0.046875 11.709 0.046875C11.353 0.046875 11.18 0.211875 11.155 0.228875C11.073 0.270875 11.005 0.337875 11.004 0.338875L4.698 6.08888L1.951 4.00488C1.832 3.91388 1.69 3.86987 1.548 3.86987C1.387 3.86987 1.226 3.92788 1.1 4.04288L0.219 4.84387C0.074 4.97587 0.001 5.15688 0.001 5.33687C0.001 5.51687 0.073 5.69688 0.218 5.82888L2.6 8.00088L0.217 10.1719C0.072 10.3039 0 10.4839 0 10.6639C0 10.8439 0.073 11.0249 0.218 11.1569L1.099 11.9579C1.226 12.0729 1.386 12.1309 1.547 12.1309C1.688 12.1309 1.83 12.0859 1.95 11.9959L4.697 9.91187L11.003 15.6619C11.003 15.6619 11.072 15.7299 11.155 15.7719C11.179 15.7889 11.353 15.9529 11.709 15.9529C11.855 15.9529 12.003 15.9209 12.141 15.8549L15.435 14.2709C15.781 14.1049 16.001 13.7539 16.001 13.3699V2.62888C16.001 2.24487 15.781 1.89488 15.435 1.72787L15.434 1.72887ZM7.217 7.99988L12.002 4.36987V11.6299L7.217 7.99988Z"/></svg>
-              </div>
-              <div class="space-y-2">
-                <h3 class="text-xl font-semibold text-text-primary">VS Code Extension</h3>
-                <p class="text-base text-text-secondary">
-                  Plan where you code.<br/>
-                  Integrated directly into your IDE.
-                </p>
-              </div>
-            </a>
-          </div>
+          <!-- VS Code Card -->
+          <a href="https://marketplace.visualstudio.com/items?itemName=manho-wong.plan-inplace" target="_blank" rel="noreferrer" class="flex gap-6 p-6 bg-transparent border border-border rounded-md text-left hover:border-accent hover:bg-sidebar transition-all duration-200 items-start group">
+            <div class="w-12 h-12 rounded-md bg-accent text-white flex items-center justify-center shrink-0 transition-transform duration-200 mt-1">
+              <svg width="24" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M15.434 1.72887L12.14 0.144875C12.002 0.078875 11.855 0.046875 11.709 0.046875C11.353 0.046875 11.18 0.211875 11.155 0.228875C11.073 0.270875 11.005 0.337875 11.004 0.338875L4.698 6.08888L1.951 4.00488C1.832 3.91388 1.69 3.86987 1.548 3.86987C1.387 3.86987 1.226 3.92788 1.1 4.04288L0.219 4.84387C0.074 4.97587 0.001 5.15688 0.001 5.33687C0.001 5.51687 0.073 5.69688 0.218 5.82888L2.6 8.00088L0.217 10.1719C0.072 10.3039 0 10.4839 0 10.6639C0 10.8439 0.073 11.0249 0.218 11.1569L1.099 11.9579C1.226 12.0729 1.386 12.1309 1.547 12.1309C1.688 12.1309 1.83 12.0859 1.95 11.9959L4.697 9.91187L11.003 15.6619C11.003 15.6619 11.072 15.7299 11.155 15.7719C11.179 15.7889 11.353 15.9529 11.709 15.9529C11.855 15.9529 12.003 15.9209 12.141 15.8549L15.435 14.2709C15.781 14.1049 16.001 13.7539 16.001 13.3699V2.62888C16.001 2.24487 15.781 1.89488 15.435 1.72787L15.434 1.72887ZM7.217 7.99988L12.002 4.36987V11.6299L7.217 7.99988Z"/></svg>
+            </div>
+            <div class="space-y-1 flex-1">
+              <h3 class="text-lg font-semibold text-text-primary">VS Code Extension</h3>
+              <p class="text-sm text-text-secondary leading-relaxed">
+                Plan tasks as you code. <br/>
+                Code and plan in one place.
+              </p>
+            </div>
+          </a>
 
-          <!-- Chrome Extension Card Stack -->
-          <div class="relative h-full group">
-            <div class="absolute inset-0 bg-sidebar border border-border rounded-md rotate-[2deg] translate-x-0.5 translate-y-1 transition-transform duration-300 group-hover:rotate-[3deg]"></div>
-            <div class="absolute inset-0 bg-sidebar border border-border rounded-md rotate-[-2deg] -translate-x-1 -translate-y-0.5 transition-transform duration-300 group-hover:rotate-[-3deg]"></div>
-            
-            <div class="relative w-full h-full p-8 bg-sidebar border border-border rounded-md text-left hover:bg-card transition-all duration-200 z-10 flex flex-col gap-6 items-start cursor-not-allowed">
-              <div class="w-12 h-12 rounded-md bg-transparent border border-border text-text-secondary flex items-center justify-center shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chrome"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" x2="12" y1="8" y2="8"/><line x1="3.95" x2="8.54" y1="6.06" y2="14"/><line x1="10.88" x2="15.46" y1="21.94" y2="14"/></svg>
-              </div>
-              <div class="space-y-2">
-                <div class="flex items-center justify-between w-full">
-                  <h3 class="text-xl font-semibold text-text-secondary">Chrome Extension</h3>
-                </div>                
-                <p class="text-base text-text-secondary italic">
-                 Coming soon
-                </p>
-              </div>
+          <!-- Chrome Extension Card (Coming Soon) -->
+          <div class="flex gap-6 p-6 bg-transparent border border-border rounded-md text-left items-start opacity-60 cursor-not-allowed">
+            <div class="w-12 h-12 rounded-md bg-transparent border border-border text-text-secondary flex items-center justify-center shrink-0 mt-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chrome"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" x2="12" y1="8" y2="8"/><line x1="3.95" x2="8.54" y1="6.06" y2="14"/><line x1="10.88" x2="15.46" y1="21.94" y2="14"/></svg>
+            </div>
+            <div class="space-y-1 flex-1">
+              <h3 class="text-lg font-semibold text-text-secondary">Chrome Extension</h3>
+              <p class="text-sm text-text-secondary italic">
+               Coming soon
+              </p>
             </div>
           </div>
         </div>
-
-        <div class="relative text-sm text-text-secondary">
-          * Supports Chromium-based browsers (e.g. Chrome, Edge, Brave)<br/>
-        </div>
-
       </div>
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-border px-[6%] py-12">
+    <footer class="border-t border-border px-[6%] pt-6 pb-12">
       <div class="max-w-5xl mx-auto">
+
+        <div class="pb-6 text-sm text-text-secondary">
+          * Supports Chromium-based desktop browsers (e.g. Chrome, Edge, Brave)
+        </div>
+
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
           <div class="space-y-2">
             <h2 class="text-xs font-bold uppercase text-text-secondary">Source Code</h2>
             <a href="https://github.com/manhowong/plan-inplace" target="_blank" rel="noreferrer" class="block text-sm font-medium text-accent hover:underline">
                 github.com/manhowong/plan-inplace
             </a>
-        </div>
+          </div>
           <div class="space-y-2">
             <h2 class="text-xs font-bold uppercase text-text-secondary">Developer</h2>
             <a href="https://github.com/manhowong" target="_blank" rel="noreferrer" class="block text-sm font-medium text-accent hover:underline">@manhowong</a>
