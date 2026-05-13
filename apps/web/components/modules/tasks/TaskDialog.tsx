@@ -243,7 +243,7 @@ export function TaskDialog({ isOpen, task, config, initialStatus, initialPriorit
                 value={formData.content}
                 onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                 rows={3}
-                className="flex-1 bg-sidebar border border-border rounded-md px-3 py-1.5 text-[13px] focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent transition-all resize-none font-sans placeholder:text-text-secondary/50"
+                className="flex-1 resize-y bg-sidebar border border-border rounded-md px-3 py-1.5 text-[13px] focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent transition-all resize-none font-sans placeholder:text-text-secondary/50"
                 placeholder="Add some details..."
               />
             </FormField>

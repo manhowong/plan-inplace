@@ -435,9 +435,9 @@ export const PlanSettings = forwardRef<PlanSettingsActions>(
 
             <button 
               onClick={handleAddField}
-              className="w-full group py-8 border-2 border-dashed border-border/40 rounded-md flex flex-col items-center justify-center gap-2 opacity-70 hover:opacity-100 hover:border-accent/40 hover:bg-accent/5 transition-all duration-300"
+              className="w-full group py-8 border-2 border-dashed border-border rounded-md flex flex-col items-center justify-center gap-2 opacity-70 hover:opacity-100 hover:border-accent/40 hover:bg-accent/5 transition-all duration-300"
             >
-              <Plus className="w-6 h-6 group-hover:scale-110 transition-transform" />
+              <Plus className="w-6 h-6" />
               <p className="text-[11px] font-bold uppercase tracking-widest">Add Field</p>
             </button>
           </section>

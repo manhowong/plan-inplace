@@ -34,10 +34,12 @@ export function FieldCard({ field, index, isError, onUpdate, onRemove }: FieldCa
       )}
     >
       <div className="flex items-start justify-between gap-6">
+        
         {field.id === 'status' && (
           <div className="flex items-center justify-between">
              <label className="text-[11px] font-semibold text-text-secondary uppercase">
               Status
+              <span className='ml-2 lowercase'>(Drag and drop to reorder)</span>
             </label>
           </div>
         )}
@@ -95,6 +97,7 @@ export function FieldCard({ field, index, isError, onUpdate, onRemove }: FieldCa
           {field.id !== 'status' && (
             <label className="text-[11px] font-semibold text-text-secondary uppercase">
               Options
+              <span className='ml-2 lowercase'>(Drag and drop to reorder)</span>
             </label>
           )}                      
           <Reorder.Group 
@@ -153,7 +156,7 @@ export function FieldCard({ field, index, isError, onUpdate, onRemove }: FieldCa
               const nextOptions = [...(field.options || []), { id, label: '', color: 'slate' }];
               onUpdate(index, { options: nextOptions });
             }}
-            className="w-full py-2 border-dashed bg-transparent hover:bg-sidebar"
+            className="w-full mt-1 py-2 border-2 border-dashed border-border bg-transparent hover:border-accent/40 hover:bg-accent/5"
           >
             <Plus className="w-3.5 h-3.5 mr-2" />
             Add New Option

@@ -198,7 +198,7 @@ export const TaskCard = memo(({
                   task.priority === 'Low' ? "bg-priority-low" :
                   "bg-priority-unassigned"
                 )} />
-                <span className="text-[10px]">{task.priority}</span>
+                <span className="text-[11px]">{task.priority}</span>
               </div>
             )}
             {boardGroupBy === 'priority' && task.status && (

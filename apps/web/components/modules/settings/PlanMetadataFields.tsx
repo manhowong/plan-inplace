@@ -42,7 +42,7 @@ export function PlanMetadataFields({ metadata, onChange }: PlanMetadataFieldsPro
             value={metadata?.notes || ''}
             rows={2}
             onChange={(e) => onChange({ notes: e.target.value })}
-            className="flex-1 bg-bg border border-border rounded-md px-3 py-2 text-[13px] focus:ring-1 focus:ring-accent focus:border-accent outline-none resize-none"
+            className="flex-1 resize-y bg-bg border border-border rounded-md px-3 py-2 text-[13px] focus:ring-1 focus:ring-accent focus:border-accent outline-none resize-none"
             placeholder="Describe your plan (Optional)"
           />
         </div>
