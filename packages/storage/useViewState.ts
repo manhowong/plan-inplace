@@ -4,7 +4,7 @@ export function useViewState() {
   const [globalTheme, setGlobalTheme] = useState<'dark' | 'light'>(() => {
     const saved = localStorage.getItem('plan-inplace_theme');
     if (saved === 'dark' || saved === 'light') return saved;
-    return 'dark';
+    return 'light';
   });
 
   const [currentModule, setCurrentModule] = useState<'tasks' | 'settings' | 'help' | 'start' | 'about'>(() => {

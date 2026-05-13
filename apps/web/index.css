@@ -1,22 +1,6 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #161616;
-  --sidebar-bg: #242424;
-  --card-bg: #3c3c3c;
-  --border: #414141;
-  --text-primary: #ffffff;
-  --text-secondary: #aeaeae;
-  --accent: #2FA084;
-  --tag-bg: #242424;
-  --priority-unassigned: #aeaeae;
-  --priority-high: #ef4444;
-  --priority-med: #eab308;
-  --priority-low: #2FA084;
-  --sidebar-active: #333333;
-}
-
-:root.light {
   --bg: #ffffff;
   --sidebar-bg: #f4f4f4;
   --card-bg: #ffffff;
@@ -30,6 +14,22 @@
   --priority-med: #eab308;
   --priority-low: #2FA084;
   --sidebar-active: #e6e6e6;
+}
+
+:root.dark {
+  --bg: #161616;
+  --sidebar-bg: #242424;
+  --card-bg: #3c3c3c;
+  --border: #414141;
+  --text-primary: #ffffff;
+  --text-secondary: #aeaeae;
+  --accent: #2FA084;
+  --tag-bg: #242424;
+  --priority-unassigned: #aeaeae;
+  --priority-high: #ef4444;
+  --priority-med: #eab308;
+  --priority-low: #2FA084;
+  --sidebar-active: #333333;
 }
 
 @theme {
@@ -122,8 +122,12 @@
 }
 
 code {
-  background-color: var(--sidebar-bg) !important;
-  color: var(--text-secondary) !important;
+  vertical-align: middle !important;
+  background-color: var(--border) !important;
+  color: var(--text-primary) !important;
+  font-size: smaller !important;
+  padding: 2px 4px !important;
+  border-radius: 2px !important;
 }
 
 /* Prose overrides for the theme */

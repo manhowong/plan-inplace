@@ -102,10 +102,10 @@ export function Help() {
             <div id="customize-task-fields" className="space-y-4">
               <h3 className="text-2xl font-bold ">Customize task fields</h3>
               <p>
-                Each task has these default fields: <strong><code>Title</code>, <code>Notes</code>, <code>Tags</code>, <code>Status</code>, <code>Priority</code>, <code>Due Date</code></strong>.
+                Each task has these default fields: <code>Title</code>, <code>Notes</code>, <code>Tags</code>, <code>Status</code>, <code>Priority</code>, <code>Due Date</code>.
               </p>
               <p>
-                You can customize <strong><code>Status</code></strong> options or add more fields in <strong>Plan Settings</strong>.
+                You can customize <code>Status</code> options or add more fields in <strong>Plan Settings</strong>.
               </p>
               <p>
                 Customized task fields only apply to one plan. To use the same settings from another plan, click <strong>Import from Another Plan...</strong>

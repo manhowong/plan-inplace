@@ -61,9 +61,9 @@ export function Start() {
                 </div>
                 <div className="space-y-2">
                   <h3 className="text-xl font-semibold text-text-primary">{UI_MESSAGES.STATIC.START.CREATE_TITLE}</h3>
-                  <p className="text-sm text-text-primary leading-normal">
-                    Choose a location to store the plan data.<br/> 
-                    We will create a folder called <b><code>/plan-inplace</code></b> there.
+                  <p className="text-sm text-text-primary">
+                    Choose a storage location.<br/> 
+                    A <code>plan-inplace</code> folder will be created inside it.
                   </p>
                 </div>
               </button>
@@ -85,7 +85,7 @@ export function Start() {
                 <div className="space-y-2">
                   <h3 className="text-xl font-semibold text-text-primary">{UI_MESSAGES.STATIC.START.OPEN_TITLE}</h3>
                   <p className="text-sm text-text-primary leading-normal">
-                    Select the directory containing the <b><code>/plan-inplace</code></b> folder or select the <b><code>/plan-inplace</code></b> folder itself.
+                    Select either the <code>plan-inplace</code> folder or its parent directory.
                   </p>
                 </div>
               </button>
