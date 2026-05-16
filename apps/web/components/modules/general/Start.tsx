@@ -34,7 +34,7 @@ export function Start() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={ANIMATION_TRANSITIONS.default}
-        className="max-w-5xl w-full space-y-12"
+        className="max-w-5xl w-full space-y-2"
       >
         {/* Header */}
         <div className="flex items-center">
@@ -45,20 +45,20 @@ export function Start() {
         <div className="flex flex-wrap gap-8 items-start">
           
           {/* Left Column: Actions */}
-          <div className="flex-1 basis-[300px] mt-8 space-y-6">
-            <div className="flex items-center gap-2 text-primary">
+          <div className="flex-1 basis-[300px] mt-6">
+            <div className="flex items-center mb-6 gap-2 text-primary">
               <h2 className="text-xl font-bold">Quick Start</h2>
             </div>
 
-            {/* Create Card Stack */}
-            <div className="relative group">
-              {/* Back Cards */}
+            {/* Create Plan */}
+            <div className="relative group mb-8">
+              {/* Background card stack */}
               <div className="absolute inset-0 bg-sidebar border border-border rounded-md rotate-[2deg] translate-x-1 translate-y-1 transition-transform duration-300 group-hover:rotate-[4deg]" />
               <div className="absolute inset-0 bg-sidebar border border-border rounded-md -rotate-[1deg] -translate-x-0.5 -translate-y-0.5 transition-transform duration-300 group-hover:-rotate-[2deg]" />
               
               <button
                 onClick={onCreatePlan}
-                className="relative w-full p-8 bg-sidebar border border-border rounded-md text-left hover:bg-card transition-all duration-200 z-10 flex gap-6 items-start"
+                className="relative w-full py-8 px-6 bg-sidebar border border-border rounded-md text-left hover:bg-card transition-all duration-200 z-10 flex gap-6 items-start"
               >
                 <div className="w-12 h-12 rounded-md bg-accent text-white flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105 group-hover:bg-[#2ebc98] mt-1">
                   <Pencil className="w-6 h-6" />
@@ -67,21 +67,21 @@ export function Start() {
                   <h3 className="text-xl font-semibold text-text-primary">{UI_MESSAGES.STATIC.START.CREATE_TITLE}</h3>
                   <p className="text-sm text-text-primary">
                     Choose a storage location.<br/> 
-                    A <code>plan-inplace</code> folder will be created inside it.
+                    A <code>plan-inplace</code> folder will be created.
                   </p>
                 </div>
               </button>
             </div>
 
-            {/* Import Card Stack */}
-            <div className="relative group">
-              {/* Back Cards */}
+            {/* Open Plan */}
+            <div className="relative group mb-8">
+              {/* Background card stack */}
               <div className="absolute inset-0 bg-sidebar border border-border rounded-md rotate-[-2deg] translate-x-0.5 translate-y-1 transition-transform duration-300 group-hover:rotate-[-4deg]" />
               <div className="absolute inset-0 bg-sidebar border border-border rounded-md rotate-[1deg] -translate-x-1 -translate-y-0.5 transition-transform duration-300 group-hover:rotate-[2deg]" />
               
               <button
                 onClick={onOpenPlan}
-                className="relative w-full p-8 bg-sidebar border border-border rounded-md text-left hover:bg-card transition-all duration-200 z-10 flex gap-6 items-start"
+                className="relative w-full py-8 px-6 bg-sidebar border border-border rounded-md text-left hover:bg-card transition-all duration-200 z-10 flex gap-6 items-start"
               >
                 <div className="w-12 h-12 rounded-md bg-transparent border border-accent text-accent flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105 group-hover:bg-accent/20 mt-1">
                   <FolderOpen className="w-6 h-6 group-hover:text-accent transition-colors" />
@@ -97,13 +97,13 @@ export function Start() {
           </div>
 
           {/* Right Column: Recent Plans */}
-          <div className="flex-1 basis-[300px]  mt-8 space-y-6">
-            <div className="flex items-center gap-2 text-primary">
+          <div className="flex-1 basis-[300px] mt-6">
+            <div className="flex items-center mb-6 gap-2 text-primary">
               <Clock className="w-6 h-6 text-accent" />
               <h2 className="text-xl font-bold">{UI_MESSAGES.STATIC.START.RECENT_TITLE}</h2>
             </div>
 
-            <div className="grid grid-cols-1 gap-3 max-h-[500px] overflow-y-auto pr-2 scrollbar-thin">
+            <div className="grid grid-cols-1 gap-3 max-h-[58dvh] overflow-y-auto pr-2 pb-1">
               {recentPlans.length > 0 ? (
                 recentPlans.map((plan) => (
                   <div
@@ -132,7 +132,7 @@ export function Start() {
                   </div>
                 ))
               ) : (
-                <div className="p-12 border-2 border-dashed border-border rounded-md flex flex-col items-center justify-center text-center space-y-3 opacity-60">
+                <div className="p-8 border-2 border-dashed border-border rounded-md flex flex-col items-center justify-center text-center space-y-3 opacity-60">
                   <p className="text-sm text-text-secondary">{UI_MESSAGES.STATIC.START.RECENT_EMPTY}</p>
                 </div>
               )}
