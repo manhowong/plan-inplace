@@ -40,7 +40,6 @@ export function getSidebarTemplate(nonce: string): string {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-weight: 600;
             font-size: 13px;
             opacity: 0.9;
           }
@@ -113,6 +112,7 @@ export function getSidebarTemplate(nonce: string): string {
           .section-header {
             height: var(--header-height);
             background-color: var(--vscode-sideBarSectionHeader-background);
+            // background-color: var(--vscode-list-hoverBackground);
             display: flex;
             align-items: center;
             padding: 0 4px;
@@ -128,7 +128,6 @@ export function getSidebarTemplate(nonce: string): string {
             display: flex;
             align-items: center;
             gap: 4px;
-            opacity: 0.7;
           }
           .section-arrow {
             transition: transform 0.1s;
@@ -155,7 +154,6 @@ export function getSidebarTemplate(nonce: string): string {
             display: flex;
             align-items: center;
             padding: 0 var(--padding-side);
-            cursor: pointer;
             gap: 8px;
           }
           .task-item:hover {
@@ -175,14 +173,11 @@ export function getSidebarTemplate(nonce: string): string {
           }
           .task-actions {
             display: flex;
-            opacity: 0;
           }
-          .task-item:hover .task-actions {
-            opacity: 1;
+          .task-title:has(+ .task-actions:hover) {
+            text-decoration: line-through;
           }
           .icon-btn {
-            padding: 2px;
-            border-radius: 3px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -191,7 +186,6 @@ export function getSidebarTemplate(nonce: string): string {
           }
           .icon-btn:hover {
             opacity: 1;
-            background-color: var(--vscode-toolbar-hoverBackground);
           }
           .icon-btn.danger:hover {
             color: var(--vscode-errorForeground);
@@ -241,6 +235,34 @@ export function getSidebarTemplate(nonce: string): string {
           }
           svg { stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
           .icon-sm { width: 12px; height: 12px; }
+          .icon-md { width: 14px; height: 14px; }
+          .icon-lg { width: 18px; height: 18px; }
+
+          .tooltip-wrapper {
+            position: relative;
+            display: inline-block;
+          }
+          .tooltip-text {
+            visibility: hidden;
+            position: absolute;
+            top: 50%;
+            right: 115%;
+            transform: translateY(-50%);
+            background-color: var(--vscode-editorHoverWidget-background);
+            color: var(--vscode-editorHoverWidget-foreground);
+            border: 2px solid var(--vscode-editorHoverWidget-border);
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 3px;
+            white-space: nowrap;
+            z-index: 1000;
+            opacity: 0;
+          }
+          .tooltip-wrapper:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+          }
+
         </style>
  			</head>
  			<body>
@@ -283,36 +305,55 @@ export function getSidebarTemplate(nonce: string): string {
           });
           function render() {
             const container = document.getElementById('content');
+
+            // No opened folder
+
             if (currentData.state === 'noWorkspace') {
               container.innerHTML = \`
-                <div class="title-area"><div class="title-row">Start Planning...</div></div>
-                <div style="padding: 0 var(--padding-side); opacity: 0.8; font-size: 13px; line-height: 1.5;">
-                  <p>To add a plan to your project, open the full app.</p>
-                  <p style="margin-top: 12px; opacity: 0.7; font-size: 12px;">If you've already created a plan in your project's directory, open the directory in VS Code [File > Open Folder...]. You will see the plan appear here.</p>
+                
+                <div style="padding: 0 var(--padding-side); font-size: 13px; line-height: 1.5;">
+                  <p>To use this <strong>sidebar</strong> for quick task management, open a folder: <br/>
+                    [File > Open Folder...]
+                  </p>
+                  <p>To use the <strong>main interface</strong> for full features, press <strong>Open Full App</strong>.</p>
+                  <button class="btn" onclick="openApp()">
+                    <div class="btn-primary-text">\${getIcon('external')}Open Full App</div>
+                    <div class="btn-secondary-text">Shift + Alt + P</div>
+                  </button>
                 </div>
-                <div class="footer"><button class="btn" onclick="openApp()"><div class="btn-primary-text">\${getIcon('external')}Open Full App</div><div class="btn-secondary-text">Shift + Alt + P</div></button></div>
               \`;
               return;
             }
+
+            // No plan detected
+
             if (currentData.state === 'noPlan') {
               container.innerHTML = \`
-                <div class="title-area"><div class="title-row">No plan found in current directory</div></div>
-                <div style="padding: 0 var(--padding-side); opacity: 0.8; font-size: 13px; line-height: 1.5;">
-                  <h3>Creating Plans</h3>
-                  <p>To create a plan in <i>this directory</i>, press "<b>Create a Plan</b>".</p>
-                  <p>You can also create a plan <i>elsewhere</i> via the app UI.</p>
-                  <p style="margin-top: 12px; opacity: 0.7; font-size: 12px;">A folder ("plan-inplace") will be created in the selected directory to store the plan.</p>
-                  <h3>Managing Tasks</h3>
-                  You can manage tasks here (if a plan exists in the current directory), or use the app UI for advanced features.
+                <div class="title-area">
+                  <div class="title-row">No plan found in current directory</div>
+                  <div class="title-subtitle" style="margin-left: 0; font-size: 11px; opacity: 0.5;">\${currentData.relativeLocation}</div>
                 </div>
-                \${feedbackMessage ? \`<div class="feedback-msg">\${feedbackMessage}</div>\` : ''}
-                <div class="input-area" style="gap: 12px;">
-                  <button class="btn" onclick="createPlan()"><div class="btn-primary-text">\${getIcon('map')}Create a Plan</div></button>
+
+                <div style="padding: 0 var(--padding-side); font-size: 13px; line-height: 1.5;">
+                  <h3>Quick Start</h3>                  
+                  <strong>Step 1</strong>: Create a plan.<br/>
+                  <strong>Step 2</strong>: Add tasks. That's it!<br/>
+                  <p>Press "<strong>Create Plan</strong>" to create a plan in the <strong>current directory</strong>.<br/>
+                    <span style="opacity: 0.7; font-size: 12px;">
+                      This creates a "plan-inplace" folder to store the data.
+                    </span>
+                  </p>
+                  <button class="btn" onclick="createPlan()"><div class="btn-primary-text">\${getIcon('map')}Create Plan</div></button>
+                  \${feedbackMessage ? \`<div class="feedback-msg">\${feedbackMessage}</div>\` : ''}
+                  <p style="padding-top:32px"><strong>Optional</strong>: Create plans anywhere via the full app.<p/>
                   <button class="btn" onclick="openApp()"><div class="btn-primary-text">\${getIcon('external')}Open Full App</div><div class="btn-secondary-text">Shift + Alt + P</div></button>
                 </div>
               \`;
               return;
             }
+            
+            // Plan detected
+            
             const tasks = currentData.tasks || [];
             const filteredTasks = tasks.filter(t => t.title.toLowerCase().includes(searchTerm.toLowerCase()));
             const activeTasks = filteredTasks.filter(t => !t.archived);
@@ -331,19 +372,39 @@ export function getSidebarTemplate(nonce: string): string {
                 <div class="input-container"><div class="input-icon">\${getIcon('filter')}</div><input id="filterInput" type="text" placeholder="Filter tasks" value="\${searchTerm}" oninput="search(this.value)"></div>
               </div>
               <div class="sections">
+
                 <div class="section \${collapsedSections.active ? 'collapsed' : 'expanded'}">
-                  <div class="section-header" onclick="toggleSection('active')"><div class="section-header-title"><div class="section-arrow">\${getIcon('arrow', 'icon-sm')}</div>\${getIcon('briefcase', 'icon-sm')}Active Tasks (\${activeTasks.length})</div></div>
-                  <div class="section-content">\${activeTasks.length === 0 ? '<div style="padding: 12px; font-size: 11px; opacity: 0.3; font-style: italic;">No active tasks</div>' : activeTasks.map(task => renderTask(task)).join('')}</div>
+                  <div class="section-header" onclick="toggleSection('active')"><div class="section-header-title"><div class="section-arrow">\${getIcon('arrow', 'icon-lg')}</div>\${getIcon('briefcase', 'icon-sm')}Active Tasks (\${activeTasks.length})</div></div>
+                  <div class="section-content">\${activeTasks.length === 0 ? '<div style="padding: 12px; font-size: 12px; opacity: 0.6; font-style: italic;">No active tasks</div>' : activeTasks.map(task => renderTask(task)).join('')}</div>
                 </div>
+
                 <div class="section \${collapsedSections.archived ? 'collapsed' : 'expanded'}">
+                                    
                   <div class="section-header">
-                    <div class="section-header-title" onclick="toggleSection('archived')"><div class="section-arrow">\${getIcon('arrow', 'icon-sm')}</div>\${getIcon('archive', 'icon-sm')}Archived (\${archivedTasks.length})</div>
-                    \${archivedTasks.length > 0 ? \`<div class="section-actions"><div class="icon-btn danger" onclick="clearArchived(event)" title="Delete all archived">\${getIcon('trash', 'icon-sm')}</div></div>\` : ''}
+                    <div class="section-header-title" onclick="toggleSection('archived')">
+                      <div class="section-arrow">\${getIcon('arrow', 'icon-lg')}</div>\${getIcon('archive', 'icon-sm')}Archived (\${archivedTasks.length})
+                    </div>
+                    \${archivedTasks.length > 0 ? 
+                      \`<div class="section-actions">
+                          <div class="tooltip-wrapper">
+                            <div class="icon-btn danger" onclick="clearArchived(event)">
+                              \${getIcon('trash', 'icon-md')}
+                            </div>
+                            <span class="tooltip-text">Delete all archived</span>
+                          </div>
+                        </div>\` : ''}
                   </div>
-                  <div class="section-content">\${archivedTasks.length === 0 ? '<div style="padding: 12px; font-size: 11px; opacity: 0.3; font-style: italic;">No archived tasks</div>' : archivedTasks.map(task => renderTask(task)).join('')}</div>
+                  
+                  <div class="section-content">
+                    \${archivedTasks.length === 0 ? '<div style="padding: 12px; font-size: 12px; opacity: 0.6; font-style: italic;">No archived tasks</div>' : archivedTasks.map(task => renderTask(task)).join('')}
+                  </div>
                 </div>
               </div>
-              <div class="footer"><button class="btn" onclick="openApp()"><div class="btn-primary-text">\${getIcon('external')}Open Full App</div><div class="btn-secondary-text">Shift + Alt + P</div></button></div>
+
+              <div class="footer">
+                <p style="margin-top: 0; opacity: 0.7; font-size: 12px;">More features available in the full app.</p>
+                <button class="btn" onclick="openApp()"><div class="btn-primary-text">\${getIcon('external')}Open Full App</div><div class="btn-secondary-text">Shift + Alt + P</div></button>
+              </div>
             \`;
             if (activeId) {
               const el = document.getElementById(activeId);
@@ -359,7 +420,18 @@ export function getSidebarTemplate(nonce: string): string {
             }
           }
           function renderTask(task) {
-            return \`<div class="task-item" onclick="toggleComplete(event, '\${task.id}')"><div class="task-title \${task.archived ? 'completed' : ''}" title="\${task.title}">\${task.title}</div><div class="task-actions"><div class="icon-btn success" onclick="toggleComplete(event, '\${task.id}')" title="\${task.archived ? 'Restore' : 'Complete'}">\${task.archived ? getIcon('archiveRestore', 'icon-sm') : getIcon('check', 'icon-sm')}</div></div></div>\`;
+            return  \`<div class="task-item">
+                        <div class="task-title \${task.archived ? 'completed' : ''}" title="\${task.title}">\${task.title}</div>
+                        <div class="task-actions">
+                          <div class="tooltip-wrapper">
+                            <div class="icon-btn success" onclick="toggleComplete(event, '\${task.id}')">
+                              \${task.archived ? getIcon('archiveRestore', 'icon-md') : getIcon('check', 'icon-md')}
+                            </div>
+                            <span class="tooltip-text">\${task.archived ? 'Restore' : 'Complete'}</span>
+                          </div>
+                        </div>
+                      </div>
+                    \`;
           }
           window.toggleSection = (name) => { collapsedSections[name] = !collapsedSections[name]; render(); };
           window.search = (val) => { searchTerm = val; render(); };
