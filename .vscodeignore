@@ -1,29 +1,44 @@
+.git/**
+.github/**
 .vscode/**
 .vscode-test/**
-out/**
+node_modules/**
+
+# Source and docs (not needed at runtime)
+apps/**
+packages/**
+public/**
+docs/**
+chrome/**
+assets/images/screenshots/**
+
+# Build/config/dev files
 src/**
+out/**
 tests/**
 demo-projects/**
-node_modules/**
 tsconfig.json
 vite.config.ts
-README.md
-DEVELOPER.md
 package-lock.json
 .gitignore
 .env.example
 index.html
-manifest.webmanifest
+app.html
 metadata.json
-chrome/**
-assets/images/*
+netlify.toml
+*.vsix
 
-# Keep the images but exclude images/screenshots
-!assets/images/*.png
-assets/images/screenshots/*
+# Keep only runtime artifacts for VS Code extension
+!dist/**
+!dist-extension/**
+!assets/images/icon.png
+!README.md
+!LICENSE
 
-# Keep the built extension
-!dist-extension/extension.cjs
-
-#Keep the vscode extension source
-!apps/vscode/**
+# Exclude screenshots not used by Help.tsx
+dist/assets/*customize-fields*
+dist/assets/*kanban-view*
+dist/assets/*sidebar-current*
+dist/assets/*sidebar-icon*
+dist/assets/*start*
+dist/assets/*table-view*
