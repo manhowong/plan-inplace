@@ -49,14 +49,16 @@
 
 Use the sidebar in VS Code for quick plan management.
 
-- Click the **Plan InPlace icon** <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/icon-192.png" height="25"> in the "Activity Bar" (left of window):
+- Click the **Plan InPlace icon** in the "Activity Bar" (left of window):
     
     <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/sidebar-icon.png" width="80">
 
 
 - Click **Create a Plan**. This initializes a new plan and creates a **`plan-inplace`** folder in the current workspace to store the plan.
 - **Add, archive, or delete tasks** directly from the sidebar.
-- **Auto-load**: Loads your plan automatically when you open the workspace.
+- **Auto-load**: The plan will be loaded automatically when you open the workspace:
+
+    <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/sidebar-current.png" width="200">
 
 ### Main Interface
 
