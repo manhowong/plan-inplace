@@ -207,9 +207,7 @@ export function useStorage(confirmRequest?: (options: any) => Promise<boolean>) 
         if (status === 'loaded') {
           await planState.refresh();
           s.notify(UI_MESSAGES.VSCODE_NOTIFICATIONS.LOAD_SUCCESS, 'info');
-        } else if (status === 'notDetected') {
-          s.notify(UI_MESSAGES.VSCODE_NOTIFICATIONS.NOT_DETECTED_WORKSPACE, 'warning');
-        }
+        } 
       };
       bootstrap();
     }

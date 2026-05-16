@@ -21,9 +21,9 @@ export const UI_MESSAGES = {
     PLAN_CREATED: (dir: string) => `${ROOT_FOLDER_NAME} folder created in ${dir}`,
     SCANNING_LOCATION: 'Scanning selected location for plan...',
     SCANNING_WORKSPACE: 'Scanning for plan in current workspace...',
-    LOAD_SUCCESS: 'Plan detected and loaded successfully',
-    NOT_DETECTED_LOCATION: `${ROOT_FOLDER_NAME} folder or files not detected in selected location`,
-    NOT_DETECTED_WORKSPACE: `${ROOT_FOLDER_NAME} folder or files not detected in current directory`
+    LOAD_SUCCESS: 'Plan loaded successfully',
+    NOT_DETECTED_LOCATION: `${ROOT_FOLDER_NAME} data not detected in selected location`,
+    NOT_DETECTED_WORKSPACE: `${ROOT_FOLDER_NAME} data not detected in current workspace`
   },
   
   CONFIRMATIONS: {

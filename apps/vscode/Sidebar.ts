@@ -98,7 +98,6 @@ export class Sidebar implements vscode.WebviewViewProvider {
     const folder = await getPlanFolder(workspaceFolder);
     if (!folder) {
       stopProgressNotification(progressId);
-      notify(UI_MESSAGES.VSCODE_NOTIFICATIONS.NOT_DETECTED_WORKSPACE, 'warning');
       return;
     }
 
