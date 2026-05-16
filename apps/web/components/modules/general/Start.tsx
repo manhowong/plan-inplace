@@ -45,7 +45,11 @@ export function Start() {
         <div className="flex flex-wrap gap-8 items-start">
           
           {/* Left Column: Actions */}
-          <div className="flex-1 basis-[300px] space-y-10">
+          <div className="flex-1 basis-[300px] mt-8 space-y-6">
+            <div className="flex items-center gap-2 text-primary">
+              <h2 className="text-xl font-bold">Quick Start</h2>
+            </div>
+
             {/* Create Card Stack */}
             <div className="relative group">
               {/* Back Cards */}
