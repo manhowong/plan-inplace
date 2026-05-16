@@ -324,16 +324,37 @@ export const PlanSettings = forwardRef<PlanSettingsActions>(
 
     const handleImportConfig = async () => {
       try {
-        const [fileHandle] = await (window as any).showOpenFilePicker({
-          types: [{
-            description: 'Plan InPlace Metadata (metadata.json)',
-            accept: { 'application/json': ['.json'] }
-          }],
-          multiple: false
-        });
+        let content = '';
+        const vscodeApi = (window as any).vscode;
+        if (vscodeApi?.postMessage) {
+          content = await new Promise<string>((resolve, reject) => {
+            const handler = (event: MessageEvent) => {
+              if (event.data?.type !== 'importConfigFileSelected') return;
+              window.removeEventListener('message', handler);
+              if (!event.data.content) {
+                const err = new Error('No file selected');
+                (err as any).name = 'AbortError';
+                reject(err);
+                return;
+              }
+              resolve(event.data.content);
+            };
+            window.addEventListener('message', handler);
+            vscodeApi.postMessage({ type: 'selectImportConfigFile' });
+          });
+        } else {
+          const [fileHandle] = await (window as any).showOpenFilePicker({
+            types: [{
+              description: 'Plan InPlace Metadata (metadata.json)',
+              accept: { 'application/json': ['.json'] }
+            }],
+            multiple: false
+          });
 
-        const file = await fileHandle.getFile();
-        const content = await file.text();
+          const file = await fileHandle.getFile();
+          content = await file.text();
+        }
+
         let parsed: any = null;
         try {
           parsed = JSON.parse(content);

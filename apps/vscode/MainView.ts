@@ -79,6 +79,9 @@ export class MainView {
         case 'selectFolder':
           await this._selectFolder();
           return;
+        case 'selectImportConfigFile':
+          await this._selectImportConfigFile();
+          return;
         case 'triggerScanning':
           notify(UI_MESSAGES.VSCODE_NOTIFICATIONS.SCANNING_WORKSPACE, 'info');
           return;
@@ -133,6 +136,31 @@ export class MainView {
       this._sendFiles();
     } else {
       this._panel.webview.postMessage({ type: 'folderSelected', path: null });
+    }
+  }
+
+  private async _selectImportConfigFile() {
+    const fileUri = await vscode.window.showOpenDialog({
+      canSelectFiles: true,
+      canSelectFolders: false,
+      canSelectMany: false,
+      openLabel: 'Select metadata.json',
+      filters: {
+        JSON: ['json']
+      }
+    });
+
+    if (!fileUri || !fileUri[0]) {
+      this._panel.webview.postMessage({ type: 'importConfigFileSelected', content: null });
+      return;
+    }
+
+    try {
+      const bytes = await vscode.workspace.fs.readFile(fileUri[0]);
+      const content = Buffer.from(bytes).toString('utf8');
+      this._panel.webview.postMessage({ type: 'importConfigFileSelected', content });
+    } catch {
+      this._panel.webview.postMessage({ type: 'importConfigFileSelected', content: null });
     }
   }
 
