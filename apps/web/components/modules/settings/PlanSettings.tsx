@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Plus, Copy, AlertCircle, Check } from 'lucide-react';
 import { UI_MESSAGES } from '@packages/types/messages';
 import { Button } from '@packages/ui/Button';
+import { Modal } from '@packages/ui/Modal';
 import { PlanMetadataFields } from './PlanMetadataFields';
 import { FieldCard } from './FieldCard';
 import { MigrationDialog, MigrationStep } from './MigrationDialog';
@@ -61,6 +62,7 @@ export const PlanSettings = forwardRef<PlanSettingsActions>(
     const [error, setError] = useState<string | null>(null);
     const [errorFields, setErrorFields] = useState<number[]>([]);
     const [showSuccess, setShowSuccess] = useState(false);
+    const [showImportModal, setShowImportModal] = useState(false);
     
     // Migration states
     const [migrationQueue, setMigrationQueue] = useState<DeletionStep[]>([]);
@@ -383,6 +385,11 @@ export const PlanSettings = forwardRef<PlanSettingsActions>(
       }
     };
 
+    const handleContinueImport = async () => {
+      setShowImportModal(false);
+      await handleImportConfig();
+    };
+
     return (
       <div className="h-full flex flex-col p-6 mx-auto space-y-8 overflow-y-auto relative">
         <AnimatePresence>
@@ -434,7 +441,7 @@ export const PlanSettings = forwardRef<PlanSettingsActions>(
               <Button
                 variant="secondary"
                 size="md"
-                onClick={handleImportConfig}
+                onClick={() => setShowImportModal(true)}
               >
                 <Copy className="w-3.5 h-3.5 mr-2" />
                 Import from Another Plan...
@@ -478,6 +485,28 @@ export const PlanSettings = forwardRef<PlanSettingsActions>(
           setTargetId={setMigrationTargetId}
           config={formData.config}
         />
+
+        <Modal
+          isOpen={showImportModal}
+          onClose={() => setShowImportModal(false)}
+          title="Import settings from another plan..."
+          footer={
+            <div className="flex justify-end gap-2">
+              <Button variant="secondary" onClick={() => setShowImportModal(false)}>
+                Cancel
+              </Button>
+              <Button variant="primary" onClick={handleContinueImport}>
+                Continue...
+              </Button>
+            </div>
+          }
+        >
+          <div className="space-y-2 text-sm text-text-primary">
+            <p className='text-lg'> Steps</p>
+            <p>1. Navigate to the <code>plan-inplace</code> folder of the target plan.</p>
+            <p>2. Select <code>metadata.json</code>.</p>
+          </div>
+        </Modal>
       </div>
     );
   }
