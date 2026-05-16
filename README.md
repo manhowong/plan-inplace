@@ -17,7 +17,7 @@
 
 ## Introduction
 
-**Plan InPlace** is a lightweight, open-source planner that keeps your plan and your project in one place, integrating project management into your agile workflow.
+**Plan InPlace** is a lightweight, open-source planner that keeps your plan and your project in one place, integrating project management into your workflow.
 
 - **No setup**: Create a plan instantly in your current workspace or selected location.
 - **Full data control**: Keep data offline, or sync it with Git and your cloud drive. 
@@ -54,7 +54,7 @@ Use the sidebar in VS Code for quick plan management.
     <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/sidebar-icon.png" width="80">
 
 
-- Click **Create a Plan**. This initializes a new plan and creates a **`plan-inplace`** folder in the current workspace to store the plan.
+- Click **Create Plan**. This initializes a new plan and creates a **`plan-inplace`** folder in the current workspace to store the plan.
 - **Add, archive, or delete tasks** directly from the sidebar.
 - **Auto-load**: The plan will be loaded automatically when you open the workspace:
 
