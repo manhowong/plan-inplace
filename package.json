@@ -39,7 +39,8 @@
   "main": "./dist-extension/extension.cjs",
   "activationEvents": [
     "onView:plan-inplace.mainView",
-    "onCommand:plan-inplace.open"
+    "onCommand:plan-inplace.open",
+    "onCommand:plan-inplace.openMarketplace"
   ],
   "contributes": {
     "viewsContainers": {
@@ -65,6 +66,12 @@
         "command": "plan-inplace.open",
         "title": "Open Plan InPlace App",
         "category": "Plan InPlace"
+      },
+      {
+        "command": "plan-inplace.openMarketplace",
+        "title": "Open Documentation",
+        "category": "Plan InPlace",
+        "icon": "$(info)"
       }
     ],
     "keybindings": [
@@ -78,6 +85,16 @@
       "commandPalette": [
         {
           "command": "plan-inplace.open"
+        },
+        {
+          "command": "plan-inplace.openMarketplace"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "plan-inplace.openMarketplace",
+          "when": "view == plan-inplace.mainView",
+          "group": "navigation"
         }
       ]
     }

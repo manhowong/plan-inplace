@@ -22,4 +22,10 @@ export function activate(context: vscode.ExtensionContext) {
       MainView.createOrShow(context.extensionUri, planId);
     })
   );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand('plan-inplace.openMarketplace', async () => {
+      await vscode.commands.executeCommand('extension.open', 'manho-wong.plan-inplace');
+    })
+  );
 }
