@@ -39,8 +39,6 @@
 - **Web App**: Access at [planinplace.netlify.app](https://planinplace.netlify.app/).
 - Both options allow for offline use.
 
----
-
 ## How to Use
 
 > **Note (VS Code users)**: It may take a few seconds for the extension to activate upon VS Code startup. If the UI is unresponsive, please wait for activation to complete.
@@ -117,8 +115,6 @@ In Board view, you can move tasks within and across columns by drag and drop.
 
 <img src="https://raw.githubusercontent.com/manhowong/plan-inplace/refs/heads/main/assets/images/screenshots/drag-and-drop.jpeg" alt="Drag and drop tasks" width="350" />
 
----
-
 ## FAQs
 
 **Where is my plan stored?**
@@ -138,8 +134,6 @@ Yes. The data (JSON) structure is designed for easy versioning and conflict reso
 **Can I collaborate with others?**
   
 Yes. The app allows for concurrent file access. Simply store the plan folder in a shared cloud drive. For asynchronous collaboration, commit it to your Git repository. Team members can pull, edit, and push changes just like code.
-
----
 
 ## About
 

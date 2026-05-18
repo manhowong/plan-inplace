@@ -8,3 +8,4 @@ coverage/
 .env*
 !.env.example
 *.vsix
+plan-inplace/
