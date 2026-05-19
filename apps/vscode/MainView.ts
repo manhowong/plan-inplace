@@ -27,7 +27,9 @@ export class MainView {
     if (MainView.currentPanel) {
       MainView.currentPanel._panel.reveal(column);
       if (planId === '__open_settings__') {
-        MainView.currentPanel._postJumpToModule('settings');
+        void MainView.currentPanel._openWorkspacePlan().then(() => {
+          MainView.currentPanel?._postJumpToModule('settings');
+        });
       } else if (planId) {
         MainView.currentPanel._panel.webview.postMessage({ type: 'jumpToPlan', id: planId });
       }
@@ -54,7 +56,7 @@ export class MainView {
     this._update();
 
     if (initialPlanId === '__open_settings__') {
-      this._postJumpToModule('settings');
+      void this._openWorkspacePlan().then(() => this._postJumpToModule('settings'));
     } else if (initialPlanId) {
       this._panel.webview.postMessage({ type: 'jumpToPlan', id: initialPlanId });
     }
@@ -110,6 +112,12 @@ export class MainView {
           return;
       }
     }, null, this._disposables);
+  }
+
+  private async _openWorkspacePlan() {
+    this._currentFolder = undefined;
+    await this._sendFiles();
+    this._panel.webview.postMessage({ type: 'update' });
   }
 
   private async _resolveBaseFolder(): Promise<vscode.Uri | undefined> {
