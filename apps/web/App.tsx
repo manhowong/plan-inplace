@@ -87,6 +87,17 @@ function AppInner({
     }
   }, [isReady, directoryName, setCurrentModule, setCurrentScope]);
 
+  useEffect(() => {
+    const onJumpModule = (event: Event) => {
+      const custom = event as CustomEvent<string>;
+      if (custom.detail === 'settings' && isReady) {
+        setCurrentModule('settings');
+      }
+    };
+    window.addEventListener('plan-inplace-jump-module', onJumpModule as EventListener);
+    return () => window.removeEventListener('plan-inplace-jump-module', onJumpModule as EventListener);
+  }, [isReady, setCurrentModule]);
+
   const confirmNavigation = (nav: any) => {
     if (currentModule === 'settings' && settingsRef.current?.isDirty()) {
       setPendingNavigation(nav);

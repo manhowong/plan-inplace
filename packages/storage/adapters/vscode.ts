@@ -31,6 +31,9 @@ export class VSCodeStorage implements StorageManager, WorkspaceStorage {
           // but we can also just use this to trigger an update notify
           this.vscode.postMessage({ type: 'openFolder', id: message.id, path: message.id });
         }
+        if (message.type === 'jumpToModule') {
+          window.dispatchEvent(new CustomEvent('plan-inplace-jump-module', { detail: message.module }));
+        }
       });
     } catch (e) {
       // Not in VS Code

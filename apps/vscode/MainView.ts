@@ -17,6 +17,7 @@ export class MainView {
   private _disposables: vscode.Disposable[] = [];
   private _currentFolder: vscode.Uri | undefined;
   private _watcher: vscode.FileSystemWatcher | undefined;
+  private _jumpModuleRetries: NodeJS.Timeout[] = [];
 
   public static createOrShow(extensionUri: vscode.Uri, planId?: string) {
     const column = vscode.window.activeTextEditor
@@ -25,7 +26,9 @@ export class MainView {
 
     if (MainView.currentPanel) {
       MainView.currentPanel._panel.reveal(column);
-      if (planId) {
+      if (planId === '__open_settings__') {
+        MainView.currentPanel._postJumpToModule('settings');
+      } else if (planId) {
         MainView.currentPanel._panel.webview.postMessage({ type: 'jumpToPlan', id: planId });
       }
       return;
@@ -50,7 +53,9 @@ export class MainView {
     this._extensionUri = extensionUri;
     this._update();
 
-    if (initialPlanId) {
+    if (initialPlanId === '__open_settings__') {
+      this._postJumpToModule('settings');
+    } else if (initialPlanId) {
       this._panel.webview.postMessage({ type: 'jumpToPlan', id: initialPlanId });
     }
 
@@ -262,6 +267,7 @@ export class MainView {
 
   public dispose() {
     MainView.currentPanel = undefined;
+    this._clearJumpModuleTimers();
     this._panel.dispose();
     while (this._disposables.length) {
       const x = this._disposables.pop();
@@ -271,6 +277,22 @@ export class MainView {
 
   private _update() {
     this._panel.webview.html = this._getHtmlForWebview();
+  }
+
+  private _clearJumpModuleTimers() {
+    this._jumpModuleRetries.forEach(t => clearTimeout(t));
+    this._jumpModuleRetries = [];
+  }
+
+  private _postJumpToModule(module: 'settings') {
+    this._clearJumpModuleTimers();
+    const delays = [0, 250, 700, 1400];
+    delays.forEach(delay => {
+      const timer = setTimeout(() => {
+        this._panel.webview.postMessage({ type: 'jumpToModule', module });
+      }, delay);
+      this._jumpModuleRetries.push(timer);
+    });
   }
 
   private _getHtmlForWebview() {
