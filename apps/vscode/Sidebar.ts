@@ -44,7 +44,13 @@ export class Sidebar implements vscode.WebviewViewProvider {
           await this._createPlan();
           break;
         case 'addTask':
-          await this._addTask(data.title);
+          await this._addTask(data.title, data.priority, data.status);
+          break;
+        case 'openSettings':
+          this._openMainView('__open_settings__');
+          break;
+        case 'updateTaskField':
+          await this._updateTaskField(data.taskId, data.field, data.value);
           break;
         case 'completeTask':
           await this._toggleComplete(data.taskId);
@@ -135,12 +141,13 @@ export class Sidebar implements vscode.WebviewViewProvider {
       
       const folderName = path.basename(folder.fsPath);
       const fallbackName = folderName === 'plan-inplace' ? path.basename(workspaceFolder.fsPath) : folderName;
-      const { name: planName } = await fileOps.readMetadata(folder, fallbackName);
+      const { name: planName, config } = await fileOps.readMetadata(folder, fallbackName);
 
       this._view.webview.postMessage({
         type: 'setData',
         state: 'hasPlan',
         tasks,
+        config,
         planName,
         location: folder.fsPath,
         relativeLocation: vscode.workspace.asRelativePath(workspaceFolder.fsPath, false)
@@ -190,15 +197,27 @@ export class Sidebar implements vscode.WebviewViewProvider {
     }
   }
 
-  private async _addTask(title: string) {
+  private async _addTask(title: string, priority?: string, status?: string) {
     const workspace = await getWorkspaceFolder();
     const folder = workspace ? await getPlanFolder(workspace) : undefined;
     if (!folder) return;
     try {
-      await fileOps.addTask(folder, title);
+      await fileOps.addTask(folder, title, { priority, status });
       this.refreshData();
     } catch {
       notify(UI_MESSAGES.ERRORS.VSCODE_ADD_TASK_FAILED, 'error');
+    }
+  }
+
+  private async _updateTaskField(taskId: string, field: string, value: string) {
+    const workspace = await getWorkspaceFolder();
+    const folder = workspace ? await getPlanFolder(workspace) : undefined;
+    if (!folder) return;
+    try {
+      await fileOps.updateTaskField(folder, taskId, field, value);
+      this.refreshData();
+    } catch {
+      notify(UI_MESSAGES.ERRORS.VSCODE_UPDATE_STATUS_FAILED, 'error');
     }
   }
 

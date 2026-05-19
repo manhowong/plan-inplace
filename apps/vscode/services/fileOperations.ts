@@ -71,12 +71,35 @@ export async function createPlan(workspace: vscode.Uri): Promise<string> {
   return UI_MESSAGES.VSCODE_NOTIFICATIONS.PLAN_CREATED(path.basename(workspace.fsPath));
 }
 
-export async function addTask(folder: vscode.Uri, title: string): Promise<void> {
+export async function addTask(
+  folder: vscode.Uri,
+  title: string,
+  options?: { priority?: string; status?: string }
+): Promise<void> {
   const tasks = await readTasks(folder);
   const { config } = await readMetadata(folder, path.basename(folder.fsPath));
-  const newTask = createNewTask(title, config, tasks as any);
+  const newTask = createNewTask(title, config, tasks as any) as any;
+  if (options?.priority) {
+    newTask.priority = options.priority;
+  }
+  if (options?.status) {
+    newTask.status = options.status;
+  }
   tasks.unshift(newTask as any);
   await writeTasks(folder, tasks);
+}
+
+export async function updateTaskField(
+  folder: vscode.Uri,
+  taskId: string,
+  field: string,
+  value: string
+): Promise<void> {
+  const tasks = await readTasks(folder);
+  const updatedTasks = tasks.map(task =>
+    task.id === taskId ? ({ ...task, [field]: value } as Task) : task
+  );
+  await writeTasks(folder, updatedTasks);
 }
 
 export async function toggleComplete(folder: vscode.Uri, taskId: string): Promise<void> {
