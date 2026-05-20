@@ -7,7 +7,7 @@ export function getSidebarTemplate(nonce: string): string {
  				<title>Plan InPlace</title>
         <style>
           :root {
-            --row-height: 28px;
+            --row-height: 24px;
             --header-height: 24px;
             --font-size: 13px;
             --padding-side: 12px;
@@ -146,10 +146,10 @@ export function getSidebarTemplate(nonce: string): string {
           .section.collapsed .section-arrow {
             transform: rotate(-90deg);
           }
-          .section-btn {
+          .section-actions {
             display: flex;
             gap: 8px;
-            padding-right: 12px;
+            margin-right: 12px;
           }
           .section-content {
             overflow-y: auto;
@@ -244,7 +244,7 @@ export function getSidebarTemplate(nonce: string): string {
           }
           svg { stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
           .icon-sm { width: 12px; height: 12px; }
-          .icon-md { width: 14px; height: 14px; }
+          .icon-md { width: 14px; height: 16px; }
           .icon-lg { width: 18px; height: 18px; }
 
           .tooltip-wrapper {
@@ -279,6 +279,7 @@ export function getSidebarTemplate(nonce: string): string {
             padding: 2px;
             color: var(--vscode-input-foreground);
             text-align: center;
+            font-size: 12px;
             font-weight: bold;
             cursor: pointer;
           }
@@ -588,13 +589,15 @@ export function getSidebarTemplate(nonce: string): string {
                 <div class="section \${collapsedSections.active ? 'collapsed' : 'expanded'}">
                   <div class="section-header">
                     <div class="section-header-title" onclick="toggleSection('active')"><div class="section-arrow">\${getIcon('arrow', 'icon-lg')}</div>Active Tasks (\${activeTasks.length})</div>
-                    <div class="section-btn tooltip-wrapper">
-                      <div class="clickable-icon" onclick="showTagMenu(event)">\${getIcon('tag', 'icon-md')}</div>
-                      <span class="tooltip-text">Show tags...</span>
-                    </div>
-                    <div class="section-btn tooltip-wrapper">
-                      <div class="clickable-icon" onclick="toggleSort(event)">\${getIcon(sortMode==='none'?'sortNone':(sortMode==='asc'?'sortAsc':'sortDesc'), 'icon-md')}</div>
-                      <span class="tooltip-text">\${sortMode==='none'?'Sort by...':(sortMode==='asc'?'Sort by tag (ascending)':'Sort by tag (descending)')}</span>
+                    <div class="section-actions">
+                      <div class="tooltip-wrapper">
+                        <div class="clickable-icon" onclick="showTagMenu(event)">\${getIcon('tag', 'icon-md')}</div>
+                        <span class="tooltip-text">Show tags...</span>
+                      </div>
+                      <div class="tooltip-wrapper">
+                        <div class="clickable-icon" onclick="toggleSort(event)">\${getIcon(sortMode==='none'?'sortNone':(sortMode==='asc'?'sortAsc':'sortDesc'), 'icon-md')}</div>
+                        <span class="tooltip-text">\${sortMode==='none'?'Sort by...':(sortMode==='asc'?'Sort by tag (ascending)':'Sort by tag (descending)')}</span>
+                      </div>
                     </div>
                   </div>
                   <div class="section-content">\${activeTasks.length === 0 ? '<div style="padding: 12px; font-size: 12px; opacity: 0.6; font-style: italic;">No active tasks</div>' : activeTasks.map(task => renderTask(task)).join('')}</div>
@@ -607,11 +610,11 @@ export function getSidebarTemplate(nonce: string): string {
                       <div class="section-arrow">\${getIcon('arrow', 'icon-lg')}</div>Archived (\${archivedTasks.length})
                     </div>
                     \${archivedTasks.length > 0 ? 
-                      \`<div class="section-btn tooltip-wrapper">
-                          <div class="clickable-icon danger" onclick="clearArchived(event)">
-                            \${getIcon('trash', 'icon-md')}
+                      \`<div class="section-actions">
+                          <div class="tooltip-wrapper">
+                            <div class="clickable-icon danger" onclick="clearArchived(event)">\${getIcon('trash', 'icon-md')}</div>
+                            <span class="tooltip-text">Delete all archived</span>
                           </div>
-                          <span class="tooltip-text">Delete all archived</span>
                         </div>\` : ''}
                   </div>
                   
@@ -647,7 +650,7 @@ export function getSidebarTemplate(nonce: string): string {
                             <span class="tooltip-text">Restore</span>
                           </div>
                           <div class="task-title completed" title="\${escapeHtmlText(task.title)}">\${escapeHtmlText(task.title)}</div>
-                          <div class="task-btn-right tooltip-wrapper">
+                          <div class="task-btn-right tooltip-wrapper" style="border:none; padding:0; margin-right:3px;">
                             <div class="clickable-icon danger" onclick="deleteTask(event, '\${task.id}')">\${getIcon('trash', 'icon-md')}</div>
                             <span class="tooltip-text">Delete permanently</span>
                           </div>
