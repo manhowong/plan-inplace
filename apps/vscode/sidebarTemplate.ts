@@ -124,7 +124,7 @@ export function getSidebarTemplate(nonce: string): string {
             // background-color: var(--vscode-list-hoverBackground);
             display: flex;
             align-items: center;
-            padding: 0 4px;
+            padding: 0 8px;
             cursor: pointer;
             flex-shrink: 0;
           }
@@ -136,7 +136,7 @@ export function getSidebarTemplate(nonce: string): string {
             letter-spacing: 0.05em;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 2px;
           }
           .section-arrow {
             transition: transform 0.1s;
@@ -149,11 +149,15 @@ export function getSidebarTemplate(nonce: string): string {
           .section-actions {
             display: flex;
             gap: 8px;
-            margin-right: 12px;
+            margin-right: 8px;
           }
           .section-content {
             overflow-y: auto;
+            overflow-x: hidden;
+            scrollbar-gutter: stable;
             flex: 1;
+            scrollbar-width: thin;
+            scrollbar-color: var(--vscode-scrollbarSlider-background) transparent;
           }
           .section.collapsed .section-content {
             display: none;
@@ -163,10 +167,13 @@ export function getSidebarTemplate(nonce: string): string {
             display: flex;
             align-items: center;
             padding: 0 var(--padding-side);
+            padding-right: 2px;
             gap: 8px;
           }
           .task-item:hover {
             background-color: var(--vscode-list-hoverBackground);
+            width: calc(100% - 14px);
+            padding-right: 14px;
           }
           .task-title {
             flex: 1;
@@ -243,10 +250,11 @@ export function getSidebarTemplate(nonce: string): string {
             margin: 0 var(--padding-side) 12px var(--padding-side);
           }
           svg { stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+          .section-arrow svg { stroke-width: 1; }
           .icon-sm { width: 12px; height: 12px; }
           .icon-md { width: 14px; height: 16px; }
           .icon-lg { width: 18px; height: 18px; }
-
+          
           .tooltip-wrapper {
             position: relative;
             display: inline-block;
@@ -338,6 +346,7 @@ export function getSidebarTemplate(nonce: string): string {
             background: transparent;
             color: inherit;
             text-align: left;
+            vertical-align: center;
             padding: 6px 8px;
             border-radius: 3px;
             cursor: pointer;
@@ -353,8 +362,9 @@ export function getSidebarTemplate(nonce: string): string {
           }
           .menu-check {
             width: 12px;
-            flex: 0 0 12px;
+            line-height: 12px;
             text-align: center;
+            font-size: 30px;
             opacity: 0.9;
           }
 
@@ -557,8 +567,8 @@ export function getSidebarTemplate(nonce: string): string {
                 <div class="input-container add-input">
                   <div class="input-icon">\${getIcon('plus')}</div>
                   <input id="addTaskInput" type="text" value="\${escapeHtmlText(addTaskDraft)}" placeholder="Add a new task" oninput="updateAddTaskDraft(this.value)" onkeydown="if(event.key==='Enter')addTask(this)">
-                  <div class="input-hint clickable-icon" onclick="addTask(this.previousElementSibling)">
-                    \${getIcon('return', 'icon-sm')} 
+                  <div class="clickable-icon input-hint" onclick="addTask(this.previousElementSibling)">
+                    \${getIcon('return', 'icon-md')} 
                   </div>
                   <div class="clickable-icon tooltip-wrapper">
                     <div style="opacity:0.7; margin-left: 0.5em; padding-top:4px;" onclick="toggleAddOptions(event)">
@@ -592,7 +602,7 @@ export function getSidebarTemplate(nonce: string): string {
                     <div class="section-actions">
                       <div class="tooltip-wrapper">
                         <div class="clickable-icon" onclick="showTagMenu(event)">\${getIcon('tag', 'icon-md')}</div>
-                        <span class="tooltip-text">Show tags...</span>
+                        <span class="tooltip-text">Show tag...</span>
                       </div>
                       <div class="tooltip-wrapper">
                         <div class="clickable-icon" onclick="toggleSort(event)">\${getIcon(sortMode==='none'?'sortNone':(sortMode==='asc'?'sortAsc':'sortDesc'), 'icon-md')}</div>
@@ -650,7 +660,7 @@ export function getSidebarTemplate(nonce: string): string {
                             <span class="tooltip-text">Restore</span>
                           </div>
                           <div class="task-title completed" title="\${escapeHtmlText(task.title)}">\${escapeHtmlText(task.title)}</div>
-                          <div class="task-btn-right tooltip-wrapper" style="border:none; padding:0; margin-right:3px;">
+                          <div class="tooltip-wrapper" style="margin-right:4px;">
                             <div class="clickable-icon danger" onclick="deleteTask(event, '\${task.id}')">\${getIcon('trash', 'icon-md')}</div>
                             <span class="tooltip-text">Delete permanently</span>
                           </div>
@@ -710,8 +720,8 @@ export function getSidebarTemplate(nonce: string): string {
           window.showTagMenu = (e) => {
             e.stopPropagation();
             openMenu(e.currentTarget, \`<div class="menu">
-              <button class="menu-item" onclick="setTagMode(event, 'priority')"><span class="menu-check">\${tagMode === 'priority' ? '●' : ''}</span>Show priority</button>
-              <button class="menu-item" onclick="setTagMode(event, 'status')"><span class="menu-check">\${tagMode === 'status' ? '●' : ''}</span>Show status</button>
+              <button class="menu-item" onclick="setTagMode(event, 'priority')"><span class="menu-check">\${tagMode === 'priority' ? '•' : ''}</span>Show Priority</button>
+              <button class="menu-item" onclick="setTagMode(event, 'status')"><span class="menu-check">\${tagMode === 'status' ? '•' : ''}</span>Show Status</button>
             </div>\`, 'show-tag-menu');
           };
           window.setTagMode = (e, mode) => { e.stopPropagation(); tagMode = mode; persistState(); closeMenu(); render(); };
@@ -721,11 +731,11 @@ export function getSidebarTemplate(nonce: string): string {
             if (!task) return;
             if (tagMode === 'priority') {
               const opts = ['Unassigned','High','Medium','Low'];
-              openMenu(e.currentTarget, \`<div class="menu"><div class="menu-title">Change priority</div>\${opts.map(opt => \`<button type="button" class="menu-item" onclick="updateCategory(event, '\${taskId}', 'priority', '\${opt}')"><span class="menu-check">\${task.priority===opt?'●':''}</span>\${escapeHtmlText(opt)}</button>\`).join('')}</div>\`, 'task-tag-' + taskId);
+              openMenu(e.currentTarget, \`<div class="menu"><div class="menu-title">Change priority</div>\${opts.map(opt => \`<button type="button" class="menu-item" onclick="updateCategory(event, '\${taskId}', 'priority', '\${opt}')"><span class="menu-check">\${task.priority===opt?'•':''}</span>\${escapeHtmlText(opt)}</button>\`).join('')}</div>\`, 'task-tag-' + taskId);
               return;
             }
             const sopts = getStatusOptions();
-            openMenu(e.currentTarget, \`<div class="menu"><div class="menu-title">Change status</div>\${sopts.map(opt => \`<button type="button" class="menu-item" onclick="updateCategory(event, '\${taskId}', 'status', '\${opt.id}')"><span class="menu-check">\${task.status===opt.id?'●':''}</span>\${escapeHtmlText(opt.label)}</button>\`).join('')}</div>\`, 'task-tag-' + taskId);
+            openMenu(e.currentTarget, \`<div class="menu"><div class="menu-title">Change status</div>\${sopts.map(opt => \`<button type="button" class="menu-item" onclick="updateCategory(event, '\${taskId}', 'status', '\${opt.id}')"><span class="menu-check">\${task.status===opt.id?'•':''}</span>\${escapeHtmlText(opt.label)}</button>\`).join('')}</div>\`, 'task-tag-' + taskId);
           };
           window.updateCategory = (e, taskId, field, value) => { e.stopPropagation(); closeMenu(); vscode.postMessage({ type: 'updateTaskField', taskId, field, value }); };
           window.clearArchived = (e) => { e.stopPropagation(); vscode.postMessage({ type: 'clearArchived' }); };
