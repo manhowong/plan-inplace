@@ -1,7 +1,7 @@
 {
   "name": "plan-inplace",
   "displayName": "Plan InPlace",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "publisher": "manho-wong",
   "description": "Lightweight project planner and todo app with Kanban boards. Git-native project management for developers, local-first and open-source.",
   "author": {
