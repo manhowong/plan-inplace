@@ -57,7 +57,7 @@ export class Sidebar implements vscode.WebviewViewProvider {
           break;
         case 'deleteTask': {
           const confirmDelete = await vscode.window.showWarningMessage(
-            UI_MESSAGES.CONFIRMATIONS.DELETE_TASK.message('this task'),
+            UI_MESSAGES.CONFIRMATIONS.DELETE_TASK.message(data.title),
             { modal: true },
             UI_MESSAGES.CONFIRMATIONS.DELETE_TASK.confirmLabel
           );

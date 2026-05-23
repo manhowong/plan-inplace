@@ -661,7 +661,7 @@ export function getSidebarTemplate(nonce: string): string {
                           </div>
                           <div class="task-title completed" title="\${escapeHtmlText(task.title)}">\${escapeHtmlText(task.title)}</div>
                           <div class="tooltip-wrapper" style="margin-right:4px;">
-                            <div class="clickable-icon danger" onclick="deleteTask(event, '\${task.id}')">\${getIcon('trash', 'icon-md')}</div>
+                            <div class="clickable-icon danger" onclick="deleteTask(event, '\${task.id}', '\${task.title}')">\${getIcon('trash', 'icon-md')}</div>
                             <span class="tooltip-text">Delete permanently</span>
                           </div>
                         </div>\`;
@@ -710,7 +710,7 @@ export function getSidebarTemplate(nonce: string): string {
             }
           };
           window.toggleComplete = (e, id) => { e.stopPropagation(); vscode.postMessage({ type: 'completeTask', taskId: id }); };
-          window.deleteTask = (e, id) => { e.stopPropagation(); vscode.postMessage({ type: 'deleteTask', taskId: id }); };
+          window.deleteTask = (e, id, title) => { e.stopPropagation(); vscode.postMessage({ type: 'deleteTask', taskId: id, title }); };
           window.toggleSort = (e) => {
             e.stopPropagation();
             sortMode = sortMode === 'none' ? 'asc' : (sortMode === 'asc' ? 'desc' : 'none');
