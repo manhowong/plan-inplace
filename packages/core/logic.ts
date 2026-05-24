@@ -1,6 +1,7 @@
 import { isToday, isTomorrow, isPast, startOfDay } from 'date-fns';
 import { Task, PlanConfig, PlanMetadata } from '@packages/types/shared';
-import { INITIAL_RANK, GAP, APP_VERSION, DEFAULT_PLAN_CONFIG, ROOT_FOLDER_NAME } from './config';
+import { version as APP_VERSION } from '../../package.json';
+import { INITIAL_RANK, GAP, DEFAULT_PLAN_CONFIG, ROOT_FOLDER_NAME } from './config';
 
 // --------------------------------------------------------------------------
 // Ranking Logic

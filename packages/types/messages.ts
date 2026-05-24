@@ -105,7 +105,6 @@ export const UI_MESSAGES = {
     HELP: {
       TITLE: 'Help',
       DESC: 'How Plan InPlace works and how to use it.'
-    },
-    VERSION: 'Version 1.0.0'
+    }
   }
 } as const;

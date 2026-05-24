@@ -4,8 +4,6 @@
 
 export const ROOT_FOLDER_NAME = 'plan-inplace';
 
-export const APP_VERSION = '1.0.0';
-
 export const METADATA_FILE = 'metadata.json';
 export const PLAN_FILE = 'plan.json';
 
